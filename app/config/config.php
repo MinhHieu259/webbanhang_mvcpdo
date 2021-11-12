@@ -1,2 +1,2 @@
 <?php
-define('BASE_URL','http://localhost/web_mvc_pdo');
+define('BASE_URL','http://localhost/webbanhang_mvcpdo');

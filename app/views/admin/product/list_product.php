@@ -68,7 +68,7 @@
             <td><span class="text-ellipsis"><?php echo number_format($product['price_product'],0,',','.').' VNĐ';?></span></td>
             <td><span class="text-ellipsis"><?php echo $product['quantity_product'];?></span></td>
             <td>
-              <a class="active" href="<?php echo BASE_URL?>/product/edit_category/<?php echo $product['id_category_product'];?>"><i class="far fa-edit"></i></a>
+              <a class="active" href="<?php echo BASE_URL?>/product/edit_product/<?php echo $product['id_product'];?>"><i class="far fa-edit"></i></a>
               <a class="active" href="<?php echo BASE_URL?>/product/delete_product/<?php echo $product['id_product'];?>"><i class="fa fa-times text-danger text"></i></a>
             </td>
           </tr>

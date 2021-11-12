@@ -81,6 +81,20 @@
                 header("Location:".BASE_URL."/product/list_product?msg=".urlencode(serialize($message)));
             }
         }
+        public function edit_product($id)
+        {
+            $table_product = "tbl_product";
+            $table_category = "tbl_category_product";
+            $cond = "id_product='$id'";
+            $productmodel = $this->load->model('productmodel');
+            $categorymodel = $this->load->model('categorymodel');
+            $data['productbyid'] = $productmodel->productbyid($table_product, $cond);
+            $data['category'] = $categorymodel->category($table_category);
+            $this->load->view('admin/header');
+            $this->load->view('admin/menu');
+            $this->load->view('admin/product/edit_product', $data);
+            $this->load->view('admin/footer');
+        }
     }
     
 ?>

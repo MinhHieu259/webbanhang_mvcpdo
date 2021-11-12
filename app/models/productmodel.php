@@ -11,7 +11,7 @@ class productmodel extends DModel{
      return $this->db->select($sql);
  }
 
- public function categorybyid($table, $cond)
+ public function productbyid($table, $cond)
  {
     $sql = "SELECT * FROM $table WHERE $cond";
     return $this->db->select($sql);
