@@ -5,7 +5,7 @@ class login extends DController
     {
         $message = array();
         $data = array();
-       parent::__construct();
+        parent::__construct();
     }
     public function index(){
       $this->login();

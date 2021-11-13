@@ -95,6 +95,60 @@
             $this->load->view('admin/product/edit_product', $data);
             $this->load->view('admin/footer');
         }
+        public function update_product($id)
+        {
+            $productmodel = $this->load->model('productmodel');
+            $cond = "id_product='$id'";
+            $table = "tbl_product";
+            $title = $_POST['title_product'];
+            $price = $_POST['price_product'];
+            $desc = $_POST['desc_product'];
+            $quantity = $_POST['quantity_product'];
+
+            $image = $_FILES['image_product']['name'];
+            $tmp_image = $_FILES['image_product']['tmp_name'];
+            $div = explode('.', $image);
+            $file_ext = strtolower(end($div));
+            $unique_image = $div[0].time().'.'.$file_ext;
+            $path_upload = "public/uploads/product/".$unique_image;
+            $category = $_POST['category_product'];
+
+            if($image){
+                $data['productbyid'] = $productmodel->productbyid($table, $cond);
+                foreach ($data['productbyid'] as $item => $value) {
+                    if($value['image_product']){
+                        unlink("public/uploads/product/".$value['image_product']);
+                    }
+                }
+                
+                $data = array( 
+                    'title_product' => $title,
+                    'price_product' => $price,
+                    'desc_product' => $desc,
+                    'quantity_product' => $quantity,
+                    'image_product' => $unique_image,
+                    'id_category_product' => $category,
+                );
+                move_uploaded_file($tmp_image, $path_upload);
+            }else{
+                $data = array(
+                    'title_product' => $title,
+                    'price_product' => $price,
+                    'desc_product' => $desc,
+                    'quantity_product' => $quantity,
+                    'id_category_product' => $category,
+                );
+            }
+         
+            $result = $productmodel->updateproduct($table, $data, $cond);
+            if($result == 1 ){
+                $message['msg'] = "Cập nhật sản phẩm thành công";
+                header("Location:".BASE_URL."/product/list_product?msg=".urlencode(serialize($message)));
+            }else {
+                $message['msg'] = "Cập nhật sản phẩm thất bại";
+                header("Location:".BASE_URL."/product/list_product?msg=".urlencode(serialize($message)));
+            }
+        }
     }
     
 ?>

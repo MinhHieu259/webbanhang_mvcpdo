@@ -19,7 +19,7 @@
                                 <?php 
                                     foreach ($data['productbyid'] as $item => $value) {
                                 ?>
-                                <form action="<?php echo BASE_URL;?>/product/update_product" method="POST" enctype="multipart/form-data">
+                                <form action="<?php echo BASE_URL;?>/product/update_product/<?php echo $value['id_product']?>" method="POST" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label style="font-size: 15px;">Tên sản phẩm</label>
                                     <input value="<?php echo $value['title_product']?>" type="text" name="title_product" class="form-control"  placeholder="Nhập tên sản phẩm">
@@ -27,6 +27,7 @@
                                 <div class="form-group">
                                     <label style="font-size: 15px;">Hình ảnh sản phẩm</label>
                                     <input  type="file" name="image_product" class="form-control"  placeholder="Nhập số lượng sản phẩm">
+                                    <p><img width="90" src="<?php echo BASE_URL.'/public/uploads/product/'.$value['image_product'];?>" alt="Ảnh sp"></p>
                                 </div>
                                 <div class="form-group">
                                     <label style="font-size: 15px;">Giá sản phẩm</label>
@@ -44,9 +45,10 @@
                                     <label style="font-size: 15px;">Danh mục sản phẩm</label>
                                     <select class="form-control" name="category_product">
                                         <?php 
-                                            foreach ($data['category'] as $item => $value) {
+                                            foreach ($data['category'] as $item => $category) {
                                         ?>
-                                        <option value="<?php echo $value['id_category_product'];?>"><?php echo $value['title_category_product'];?></option>
+                                        <option <?php if($value['id_category_product'] == $category['id_category_product']) echo 'selected'; else echo ''; ?> value="<?php echo $category['id_category_product'];?>">
+                                        <?php echo $category['title_category_product'];?></option>
                                         <?php 
                                             }
                                         ?>

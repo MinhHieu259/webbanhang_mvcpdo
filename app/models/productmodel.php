@@ -21,8 +21,8 @@ class productmodel extends DModel{
  {
     return $this->db->insert($tbl_product, $data);
  }
- public function updatecategory($tbl_category_product, $data, $cond){
-     return $this->db->update($tbl_category_product, $data, $cond);
+ public function updateproduct($tbl_product, $data, $cond){
+     return $this->db->update($tbl_product, $data, $cond);
  }
  public function deletecategory($tbl_category_product, $cond)
  {
