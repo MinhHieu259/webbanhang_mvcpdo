@@ -27,6 +27,12 @@
         $this->load->view('categoryproduct');
         $this->load->view('footer');
        }
+       public function chitietsanpham()
+       {
+        $this->load->view('header');
+        $this->load->view('detailproduct');
+        $this->load->view('footer');
+       }
     }
     
 ?>
