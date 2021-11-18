@@ -14,7 +14,7 @@ class login extends DController
    public function login()
    {
        $this->load->view('header');
-       Session::init();
+       
        if(Session::get('login')){
         header("Location:".BASE_URL."/login/dashboard");
        }

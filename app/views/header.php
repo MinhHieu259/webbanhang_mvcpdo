@@ -11,7 +11,7 @@
     <link href="<?php echo BASE_URL;?>/public/css/prettyPhoto.css" rel="stylesheet">
     <link href="<?php echo BASE_URL;?>/public/css/price-range.css" rel="stylesheet">
     <link href="<?php echo BASE_URL;?>/public/css/animate.css" rel="stylesheet">
-	<link href="<?php echo BASE_URL;?>/public/css/main.css" rel="stylesheet">
+	<link href="<?php echo BASE_URL;?>/public/css/main2.css" rel="stylesheet">
 	<link href="<?php echo BASE_URL;?>/public/css/responsive.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
@@ -40,7 +40,7 @@
 								<li><a href=""><i class="fa fa-user"></i> Tài khoản</a></li>
 								<li><a href=""><i class="fa fa-star"></i> Yêu thích</a></li>
 								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Thanh toán</a></li>
-								<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
+								<li><a href="<?php echo BASE_URL;?>/cart"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
 								<li><a href="login.html"><i class="fa fa-lock"></i> Đăng nhập</a></li>
 							</ul>
 						</div>
@@ -80,7 +80,7 @@
                                     </ul>
                                 </li> 
 								<li><a href="404.html">404</a></li>
-								<li><a href="contact-us.html">Contact</a></li>
+								<li><a href="<?php echo BASE_URL;?>/index/lienhe">Liên hệ</a></li>
 							</ul>
 						</div>
 					</div>

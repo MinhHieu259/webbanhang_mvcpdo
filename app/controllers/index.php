@@ -33,6 +33,13 @@
         $this->load->view('detailproduct');
         $this->load->view('footer');
        }
+
+       public function lienhe()
+       {
+        $this->load->view('header');
+        $this->load->view('contact');
+        $this->load->view('footer');
+       }
     }
     
 ?>

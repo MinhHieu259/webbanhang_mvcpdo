@@ -5,20 +5,13 @@ class cart extends DController{
     }
     public function index()
     {
-        $this->order();
+        $this->cart();
     }
-    public function order()
+    public function cart()
     {
-        $this->load->view('admin/header');
-       $this->load->view('admin/menu');
-       $this->load->view('admin/order/order');
-       $this->load->view('admin/footer');
+        $this->load->view('header');
+       $this->load->view('cart');
+       $this->load->view('footer');
     }
-public function add_order()
-{
-       $this->load->view('admin/header');
-       $this->load->view('admin/menu');
-       $this->load->view('admin/order/add_order');
-       $this->load->view('admin/footer');
-}
+
 }
