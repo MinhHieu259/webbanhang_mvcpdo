@@ -149,6 +149,7 @@
                 header("Location:".BASE_URL."/product/list_product?msg=".urlencode(serialize($message)));
             }
         }
+        
     }
     
 ?>

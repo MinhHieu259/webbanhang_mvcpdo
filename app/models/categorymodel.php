@@ -9,7 +9,11 @@ class categorymodel extends DModel{
      $sql = "SELECT * FROM $tbl_category_product ORDER BY id_category_product DESC";
      return $this->db->select($sql);
  }
-
+ public function category_home($tbl_category_product)
+ {
+     $sql = "SELECT * FROM $tbl_category_product ORDER BY id_category_product DESC";
+     return $this->db->select($sql);
+ }
  public function categorybyid($table, $cond)
  {
     $sql = "SELECT * FROM $table WHERE $cond";

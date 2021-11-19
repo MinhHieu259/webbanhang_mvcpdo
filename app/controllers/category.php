@@ -109,6 +109,15 @@
                 header("Location:".BASE_URL."/category/list_category?msg=".urlencode(serialize($message)));
             }
         }
+        public function list_category_home()
+        {
+            $this->load->view("header");
+            $categorymodel = $this->load->model("categorymodel");
+            $data['category'] = $categorymodel->category_home();
+            $this->load->view("categoryproduct");
+            $this->load->view("footer");
+
+        }
     }
     
 ?>
