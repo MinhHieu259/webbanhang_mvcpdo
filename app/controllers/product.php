@@ -149,7 +149,17 @@
                 header("Location:".BASE_URL."/product/list_product?msg=".urlencode(serialize($message)));
             }
         }
-        
+        public function product_category($id)
+        {
+            $categorymodel = $this->load->model("categorymodel");
+            $table_category_product = "tbl_category_product";
+            $table_product = "tbl_product";
+            $data['category'] = $categorymodel->category_home($table_category_product);
+            $data['category_by_id'] = $categorymodel->category_by_id_home($table_category_product, $table_product, $id);
+            $this->load->view("header", $data);
+            $this->load->view("categoryproduct", $data);
+            $this->load->view("footer");
+        }
     }
     
 ?>

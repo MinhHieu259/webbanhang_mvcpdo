@@ -9,7 +9,10 @@ class cart extends DController{
     }
     public function cart()
     {
-        $this->load->view('header');
+        $categorymodel = $this->load->model("categorymodel");
+            $table_category_product = "tbl_category_product";
+            $data['category'] = $categorymodel->category_home($table_category_product);
+        $this->load->view('header', $data);
        $this->load->view('cart');
        $this->load->view('footer');
     }

@@ -31,5 +31,12 @@ class categorymodel extends DModel{
  {
      return $this->db->delete($tbl_category_product, $cond);
  }
+ public function category_by_id_home($table_category_product, $table_product, $id)
+ {
+     $sql = "SELECT * FROM $table_category_product, $table_product WHERE
+      $table_category_product.id_category_product = $table_product.id_category_product 
+       AND $table_product.id_category_product = '$id' ORDER BY $table_product.id_product DESC";
+       return $this->db->select($sql);
+ }
 }
 ?>

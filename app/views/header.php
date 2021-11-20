@@ -11,7 +11,7 @@
     <link href="<?php echo BASE_URL;?>/public/css/prettyPhoto.css" rel="stylesheet">
     <link href="<?php echo BASE_URL;?>/public/css/price-range.css" rel="stylesheet">
     <link href="<?php echo BASE_URL;?>/public/css/animate.css" rel="stylesheet">
-	<link href="<?php echo BASE_URL;?>/public/css/main2.css" rel="stylesheet">
+	<link href="<?php echo BASE_URL;?>/public/css/main.css" rel="stylesheet">
 	<link href="<?php echo BASE_URL;?>/public/css/responsive.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
@@ -66,13 +66,20 @@
 								<li><a href="<?php echo BASE_URL;?>/index" class="active">Trang chủ</a></li>
 								<li class="dropdown"><a href="#">Danh mục<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
-                                        <li class="dropdown"><a href="<?php echo BASE_URL;?>/category">Sản phẩm</a></li>
+										<?php 
+											foreach ($data['category'] as $item => $category) {
+										?>
+                                        <li class="dropdown"><a href="<?php echo BASE_URL;?>/product/product_category/<?php echo $category['id_category_product']?>">
+										<?php echo $category['title_category_product']?></a></li>
+										<?php 
+											}
+										?>
                                     </ul>
                                 </li> 
-								<li class="dropdown"><a href="#">Tin tức<i class="fa fa-angle-down"></i></a>
+								<li class="dropdown"><a href="#">Thương hiệu<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
-                                        <li><a href="blog.html">Blog List</a></li>
-										<li><a href="blog-single.html">Blog Single</a></li>
+                                        <li><a href="blog.html">Apple</a></li>
+										
                                     </ul>
                                 </li> 
 								<li><a href="404.html">Giỏ hàng</a></li>
