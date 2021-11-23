@@ -38,5 +38,12 @@ class categorymodel extends DModel{
        AND $table_product.id_category_product = '$id' ORDER BY $table_product.id_product DESC";
        return $this->db->select($sql);
  }
+ public function get_name_category_byid($table_category_product, $table_product, $id)
+ {
+    $sql = "SELECT * FROM $table_category_product, $table_product WHERE
+    $table_category_product.id_category_product = $table_product.id_category_product 
+     AND $table_product.id_category_product = '$id' ORDER BY $table_product.id_product DESC LIMIT 1";
+     return $this->db->select($sql);
+ }
 }
 ?>

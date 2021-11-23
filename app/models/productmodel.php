@@ -28,5 +28,15 @@ class productmodel extends DModel{
  {
      return $this->db->delete($tbl_category_product, $cond);
  }
+ public function list_product_home($table_product)
+ {
+     $sql = "SELECT * FROM $table_product ORDER BY $table_product.id_product DESC";
+     return $this->db->select($sql);
+ }
+ public function list_product_feature($table_product)
+ {
+     $sql = "SELECT * FROM $table_product WHERE noibat= 1 ORDER BY $table_product.id_product DESC";
+     return $this->db->select($sql);
+ }
 }
 ?>

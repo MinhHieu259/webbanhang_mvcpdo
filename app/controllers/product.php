@@ -104,6 +104,7 @@
             $price = $_POST['price_product'];
             $desc = $_POST['desc_product'];
             $quantity = $_POST['quantity_product'];
+            $noibat = $_POST['noibat'];
 
             $image = $_FILES['image_product']['name'];
             $tmp_image = $_FILES['image_product']['tmp_name'];
@@ -128,6 +129,7 @@
                     'quantity_product' => $quantity,
                     'image_product' => $unique_image,
                     'id_category_product' => $category,
+                    'noibat' => $noibat
                 );
                 move_uploaded_file($tmp_image, $path_upload);
             }else{
@@ -137,6 +139,7 @@
                     'desc_product' => $desc,
                     'quantity_product' => $quantity,
                     'id_category_product' => $category,
+                    'noibat' => $noibat
                 );
             }
          
@@ -155,11 +158,26 @@
             $table_category_product = "tbl_category_product";
             $table_product = "tbl_product";
             $data['category'] = $categorymodel->category_home($table_category_product);
+            $data['category_name_id'] = $categorymodel->get_name_category_byid($table_category_product, $table_product, $id);
             $data['category_by_id'] = $categorymodel->category_by_id_home($table_category_product, $table_product, $id);
             $this->load->view("header", $data);
             $this->load->view("categoryproduct", $data);
             $this->load->view("footer");
         }
+        public function tatcasanpham()
+        {
+            $categorymodel = $this->load->model("categorymodel");
+            $productmodel = $this->load->model("productmodel");
+            $table_category_product = "tbl_category_product";
+            $table_product = "tbl_product";
+            $data['category'] = $categorymodel->category_home($table_category_product);
+            $data['list_product'] = $productmodel->list_product_home($table_product);
+            $this->load->view("header", $data);
+            $this->load->view("list_product", $data);
+            $this->load->view("footer");
+        }
+        
+       
     }
     
 ?>

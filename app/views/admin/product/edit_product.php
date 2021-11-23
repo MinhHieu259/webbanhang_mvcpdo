@@ -54,6 +54,17 @@
                                         ?>
                                     </select>
                                 </div>
+                                <div class="form-group">
+                                    <label style="font-size: 15px;">Nổi bật</label>
+                                    <select class="form-control" name="noibat">
+                                        
+                                        <option <?php if($value['noibat'] == 1) echo 'selected'; else echo ''; ?> value="1">
+                                        Nổi bật</option>
+                                        <option <?php if($value['noibat'] == 0) echo 'selected'; else echo ''; ?> value="0">
+                                        Không nổi bật</option>
+                                     
+                                    </select>
+                                </div>
                                 <button type="submit" class="btn btn-info">Cập nhật sản phẩm</button>
                             </form>
                            <?php 

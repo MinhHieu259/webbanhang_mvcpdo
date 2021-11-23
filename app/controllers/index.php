@@ -13,8 +13,11 @@
        public function homepage()
        {
             $categorymodel = $this->load->model("categorymodel");
+            $productmodel = $this->load->model("productmodel");
             $table_category_product = "tbl_category_product";
+            $table_product = "tbl_product";
             $data['category'] = $categorymodel->category_home($table_category_product);
+            $data['list_product_feature'] = $productmodel->list_product_feature($table_product);
            $this->load->view('header', $data);
            $this->load->view('slider');
            $this->load->view('home', $data);
