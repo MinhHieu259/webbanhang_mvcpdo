@@ -10,6 +10,7 @@
             $this->add_product();
           
         }
+        // ADMIN
         public function add_product()
         {
             $this->load->view('admin/header');
@@ -152,6 +153,8 @@
                 header("Location:".BASE_URL."/product/list_product?msg=".urlencode(serialize($message)));
             }
         }
+
+        // USER
         public function product_category($id)
         {
             $categorymodel = $this->load->model("categorymodel");
@@ -176,7 +179,19 @@
             $this->load->view("list_product", $data);
             $this->load->view("footer");
         }
-        
+        public function chitietsanpham($id)
+        {
+            $categorymodel = $this->load->model("categorymodel");
+            $productmodel = $this->load->model("productmodel");
+            $table_category_product = "tbl_category_product";
+            $table_product = "tbl_product";
+            $cond = "$table_product.id_product = '$id'";
+            $data['category'] = $categorymodel->category_home($table_category_product);
+            $data['detail_product'] = $productmodel->detail_product_home($table_category_product,$table_product, $cond);
+            $this->load->view("header",$data);
+            $this->load->view("detailproduct", $data);
+            $this->load->view("footer");
+        }
        
     }
     

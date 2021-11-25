@@ -38,5 +38,10 @@ class productmodel extends DModel{
      $sql = "SELECT * FROM $table_product WHERE noibat= 1 ORDER BY $table_product.id_product DESC";
      return $this->db->select($sql);
  }
+ public function detail_product_home($table_category_product, $table_product, $cond)
+ {
+     $sql = "SELECT * FROM $table_product WHERE $cond";
+     return $this->db->select($sql);
+ }
 }
 ?>

@@ -26,7 +26,7 @@
 								</div>
 								<div class="choose">
 									<ul class="nav nav-pills nav-justified">
-										<li><a href="#"><i class="fa fa-plus-square"></i>Xem chi tiết</a></li>
+										<li><a href="<?php echo BASE_URL;?>/product/chitietsanpham/<?php echo $product['id_product'];?>"><i class="fa fa-plus-square"></i>Xem chi tiết</a></li>
 										<li><a href="#"><i class="fa fa-plus-square"></i>Yêu thích</a></li>
 									</ul>
 								</div>
