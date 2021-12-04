@@ -32,7 +32,7 @@ class login extends DController
     public function authentication_login()
     {
         $username = $_POST['username'];
-        $password = md5($_POST['password']);
+        $password = $_POST['password'];
         $table_admin = "tbl_admin";
         $loginmodel = $this->load->model("loginmodel");
         $count = $loginmodel->login($table_admin, $username, $password);
