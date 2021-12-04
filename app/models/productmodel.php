@@ -33,15 +33,26 @@ class productmodel extends DModel{
      $sql = "SELECT * FROM $table_product ORDER BY $table_product.id_product DESC";
      return $this->db->select($sql);
  }
+ public function list_product_home_limit($table_product)
+ {
+     $sql = "SELECT * FROM $table_product ORDER BY id_product DESC";
+     return $this->db->select($sql);
+ }
  public function list_product_feature($table_product)
  {
      $sql = "SELECT * FROM $table_product WHERE noibat= 1 ORDER BY $table_product.id_product DESC";
      return $this->db->select($sql);
  }
- public function detail_product_home($table_category_product, $table_product, $cond)
+
+ public function detail_product_home($table_product,$table_category_product, $cond)
  {
-     $sql = "SELECT * FROM $table_product WHERE $cond";
+     $sql = "SELECT * FROM $table_product, $table_category_product WHERE $cond";
      return $this->db->select($sql);
+ }
+ public function relate_product_home($table_product,$table_category_product, $cond_relate)
+ {
+    $sql = "SELECT * FROM $table_product, $table_category_product WHERE $cond_relate";
+    return $this->db->select($sql);
  }
 }
 ?>

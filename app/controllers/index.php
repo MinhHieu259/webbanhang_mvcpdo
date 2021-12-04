@@ -18,6 +18,7 @@
             $table_product = "tbl_product";
             $data['category'] = $categorymodel->category_home($table_category_product);
             $data['list_product_feature'] = $productmodel->list_product_feature($table_product);
+            $data['list_product'] = $productmodel->list_product_home($table_product);
            $this->load->view('header', $data);
            $this->load->view('slider');
            $this->load->view('home', $data);
