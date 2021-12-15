@@ -19,7 +19,44 @@ class cart extends DController{
     }
     public function addCart()
     {
-        # code...
+        Session::init();
+        $cartmodel = $this->load->model("cartmodel");
+        $table_detail = "tbl_cart_deltails";
+        $customer_id = Session::get("customer_id");
+        $id_cart = Session::get('cart_id');
+        $id_product = $_POST['product_id'];
+        $product_quantity = $_POST['product_quantity'];
+        $check_cart = $cartmodel->checkCart($table_detail, $id_cart, $id_product);
+        if($customer_id == null){
+            $message['msg'] = "Bạn chưa đăng nhập";
+            header("Location:".BASE_URL."/index?msg=".urlencode(serialize($message)));
+    
+        }else if($customer_id != null && $check_cart == 1){
+            $info_item = $cartmodel->getItemCartById($table_detail, $id_cart, $id_product);
+            $cond = "id_cart='$id_cart' AND id_product = $id_product";
+            $data_quan = array(
+                'quantity_product' => $info_item[0]['quantity_product'] + 1
+               
+            );
+            $result = $cartmodel->update_quantity($table_detail, $data_quan, $cond);
+        } else{
+        
+        $data = array(
+            'id_cart' => $id_cart,
+            'id_product' => $id_product,
+            'quantity_product' => $product_quantity
+        );
+        
+        $result = $cartmodel->insertcart($table_detail, $data);
+        if($result == 1 ){
+            $message['msg'] = "Thêm giỏ hàng sản phẩm thành công";
+            header("Location:".BASE_URL."/cart?msg=".urlencode(serialize($message)));
+        }else {
+            $message['msg'] = "Thêm giỏ hàng sản phẩm thất bại";
+            header("Location:".BASE_URL."/cart?msg=".urlencode(serialize($message)));
+        }
+        }
+        
     }
 
 }

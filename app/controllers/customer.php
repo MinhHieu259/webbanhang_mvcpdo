@@ -29,6 +29,7 @@
         $username = $_POST['txtEmailLogin'];
         $password = $_POST['txtPassLogin'];
         $table_customer = "tbl_customer";
+        $table_cart = "tbl_cart";
         $customermodel = $this->load->model('customermodel');
         $count = $customermodel->dangnhap($table_customer, $username, $password);
 
@@ -36,11 +37,12 @@
             $message['msg'] = "Tài khoản hoặc mật khẩu không đúng";
             header("Location:".BASE_URL."/customer/dangnhap_dangky?msg=".urlencode(serialize($message)));
         }else {
-           $result = $customermodel->getLogin($table_customer, $username, $password);
+           $result = $customermodel->getLogin($table_customer, $table_cart, $username, $password);
            Session::init();
            Session::set('customer_login', true);
            Session::set('customer_name', $result[0]['customer_name']);
            Session::set('customer_id', $result[0]['customer_id']);
+           Session::set('cart_id', $result[0]['id_cart']);
            $message['msg'] = "Đăng nhập thành công";
            header("Location:".BASE_URL."/customer/dangnhap_dangky?msg=".urlencode(serialize($message)));
         }
@@ -102,6 +104,7 @@
                 Session::unset("customer_login");
                 Session::unset("customer_name");
                 Session::unset("customer_id");
+                Session::unset("cart_id");
                 $message['msg'] = "Đăng xuất thành công";
                 header("Location:".BASE_URL."/customer/dangnhap_dangky?msg=".urlencode(serialize($message)));
        }

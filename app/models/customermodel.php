@@ -14,9 +14,9 @@ class customermodel extends DModel{
      $sql = "SELECT * FROM $table_customer WHERE customer_email = ? AND customer_password = ?";
      return $this->db->affectedRows($sql, $username, $password);
  }
- public function getLogin($table_customer, $username, $password)
+ public function getLogin($table_customer, $table_cart, $username, $password)
  {
-    $sql = "SELECT * FROM $table_customer WHERE customer_email = ? AND customer_password = ?";
+    $sql = "SELECT * FROM $table_customer, $table_cart WHERE $table_customer.customer_id = $table_cart.user_id AND $table_customer.customer_email = ? AND $table_customer.customer_password = ?";
     return $this->db->selectUser($sql, $username, $password);
  }
  public function getAllUser($table_customer)
