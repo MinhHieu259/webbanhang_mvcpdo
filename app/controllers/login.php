@@ -13,13 +13,13 @@ class login extends DController
 
    public function login()
    {
-       //$this->load->view('header');
+       
        Session::init();
        if(Session::get('login')){
         header("Location:".BASE_URL."/login/dashboard");
        }
        $this->load->view('admin/login');
-       //$this->load->view('footer');
+       
    }
    public function dashboard()
    {
@@ -51,7 +51,7 @@ class login extends DController
     }
     public function logout(){
         Session::init();
-        Session::destroy();
+        Session::unset("login");
         header("Location:".BASE_URL."/login");
     }
 }

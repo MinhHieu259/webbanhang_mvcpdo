@@ -41,7 +41,14 @@
 								<li><a href=""><i class="fa fa-star"></i> Yêu thích</a></li>
 								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Thanh toán</a></li>
 								<li><a href="<?php echo BASE_URL;?>/cart"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
-								<li><a href="<?php echo BASE_URL;?>/customer/dangnhap_dangky"><i class="fa fa-lock"></i> Đăng nhập</a></li>
+								<?php 
+									if(Session::get("customer_login") == true){
+								?>
+									<li><a href="<?php echo BASE_URL;?>/customer/dangxuat"><i class="fa fa-lock"></i> Đăng xuất</a></li>
+								<?php }else{?>
+									<li><a href="<?php echo BASE_URL;?>/customer/dangnhap_dangky"><i class="fa fa-lock"></i> Đăng nhập</a></li>
+								<?php }?>
+								
 							</ul>
 						</div>
 					</div>

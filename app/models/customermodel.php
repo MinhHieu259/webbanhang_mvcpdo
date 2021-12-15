@@ -4,9 +4,29 @@ class customermodel extends DModel{
     {
         parent::__construct();
     }
- public function dangky()
+ public function dangky($table, $data)
  {
-     # code...
+    return $this->db->insert($table, $data);
+ }
+
+ public function dangnhap($table_customer, $username, $password)
+ {
+     $sql = "SELECT * FROM $table_customer WHERE customer_email = ? AND customer_password = ?";
+     return $this->db->affectedRows($sql, $username, $password);
+ }
+ public function getLogin($table_customer, $username, $password)
+ {
+    $sql = "SELECT * FROM $table_customer WHERE customer_email = ? AND customer_password = ?";
+    return $this->db->selectUser($sql, $username, $password);
+ }
+ public function getAllUser($table_customer)
+ {
+    $sql = "SELECT * FROM $table_customer ORDER BY customer_id DESC";
+    return $this->db->select($sql);
+ }
+ public function insert_cart($table_cart, $data)
+ {
+    return $this->db->insert($table_cart, $data);
  }
 }
 ?>

@@ -163,6 +163,7 @@
             $data['category'] = $categorymodel->category_home($table_category_product);
             $data['category_name_id'] = $categorymodel->get_name_category_byid($table_category_product, $table_product, $id);
             $data['category_by_id'] = $categorymodel->category_by_id_home($table_category_product, $table_product, $id);
+            Session::init();
             $this->load->view("header", $data);
             $this->load->view("categoryproduct", $data);
             $this->load->view("footer");
@@ -175,6 +176,7 @@
             $table_product = "tbl_product";
             $data['category'] = $categorymodel->category_home($table_category_product);
             $data['list_product'] = $productmodel->list_product_home($table_product);
+            Session::init();
             $this->load->view("header", $data);
             $this->load->view("list_product", $data);
             $this->load->view("footer");
@@ -195,6 +197,7 @@
             $cond_relate = "$table_product.id_category_product = $table_category_product.id_category_product AND $table_category_product.id_category_product = '$id_cate' 
             AND $table_product.id_product NOT IN('$id')  ORDER BY $table_product.id_product DESC LIMIT 3";
             $data['relate_product'] = $productmodel->relate_product_home($table_product,$table_category_product, $cond_relate);
+            Session::init();
             $this->load->view("header",$data);
             $this->load->view("detailproduct", $data);
             $this->load->view("footer");

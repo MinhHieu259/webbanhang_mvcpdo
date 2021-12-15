@@ -19,6 +19,7 @@
             $data['category'] = $categorymodel->category_home($table_category_product);
             $data['list_product_feature'] = $productmodel->list_product_feature($table_product);
             $data['list_product'] = $productmodel->list_product_home($table_product);
+            Session::init();
            $this->load->view('header', $data);
            $this->load->view('slider');
            $this->load->view('home', $data);
@@ -30,6 +31,7 @@
        }
        public function danhmuc()
        {
+        Session::init();
         $this->load->view('header');
         $this->load->view('categoryproduct');
         $this->load->view('footer');
@@ -39,6 +41,7 @@
         $categorymodel = $this->load->model("categorymodel");
         $table_category_product = "tbl_category_product";
         $data['category'] = $categorymodel->category_home($table_category_product);
+        Session::init();
         $this->load->view('header', $data);
         $this->load->view('detailproduct');
         $this->load->view('footer');
@@ -49,6 +52,7 @@
         $categorymodel = $this->load->model("categorymodel");
         $table_category_product = "tbl_category_product";
         $data['category'] = $categorymodel->category_home($table_category_product);
+        Session::init();
         $this->load->view('header', $data);
         $this->load->view('contact');
         $this->load->view('footer');
