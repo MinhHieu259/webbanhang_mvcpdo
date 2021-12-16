@@ -9,9 +9,15 @@
 					<?php foreach ($data['category'] as $item => $cate) {?>
 					<div class="recommended_items"><!--recommended_items-->
 						<h2 class="title text-center"><a href="<?php echo BASE_URL;?>/product/product_category/<?php echo $cate['id_category_product']?>"><?php echo $cate['title_category_product'];?></a></h2>
+						
 						<?php foreach ($data['list_product'] as $item => $product_cate_home) {
 							if($cate['id_category_product'] == $product_cate_home['id_category_product']){
 						?>
+						
+						
+							<form action="<?php echo BASE_URL;?>/cart/addCart" method="post">
+							<input type="hidden" name="product_id" value="<?php echo $product_cate_home['id_product'];?>">
+							<input type="hidden" name="product_quantity" value="1">
 						<div class="col-sm-4">
 							<div class="product-image-wrapper">
 								<div class="single-products">
@@ -25,7 +31,7 @@
 											<div class="overlay-content">
 												<h2><?php echo number_format($product_cate_home['price_product'],0,',','.').' VNĐ';?></h2>
 												<p><?php echo $product_cate_home['desc_product']?></p>
-												<a href="<?php echo $product_cate_home['id_product'];?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm giỏ hàng</a>
+												<button type="submit" href="<?php echo $product_cate_home['id_product'];?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm giỏ hàng</button>
 											</div>
 										</div>
 								</div>
@@ -37,11 +43,13 @@
 								</div>
 							</div>
 						</div>
+						</form>
 						<?php }
 						
 					}?>
 					</div><!--/recommended_items-->
 					<?php }?>
+					
 				</div>
 			</div>
 		</div>
