@@ -36,5 +36,9 @@ class cartmodel extends DModel{
     {
         return $this->db->update($table, $data, $cond);
     }
+    public function update_so_am($table, $cond)
+    {
+        return $this->db->delete($table, $cond);
+    }
 }
 ?>

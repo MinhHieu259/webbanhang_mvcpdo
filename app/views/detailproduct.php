@@ -17,6 +17,7 @@ foreach ($data['detail_product'] as $item => $value) {
 			<div class="row">
 					<?php include_once("sidebar.php");?>
 				<div class="col-sm-9 padding-right">
+					<form action="<?php echo BASE_URL;?>/cart/addCart" method="post">
 					<?php foreach ($data['detail_product'] as $item => $detail) {
 						
 					?>
@@ -63,8 +64,9 @@ foreach ($data['detail_product'] as $item => $value) {
 								<span>
 									<span><?php echo number_format($detail['price_product'],0,',','.').' VNĐ';?></span>
 									<label>Số lượng:</label>
-									<input type="number" value="1" />
-									<button type="button" class="btn btn-fefault cart">
+									<input type="hidden" name="product_id" value="<?php echo $detail['id_product'];?>">
+									<input type="hidden" name="product_quantity" value="1">
+									<button type="submit" class="btn btn-fefault cart">
 										<i class="fa fa-shopping-cart"></i>
 										Thêm giỏ hàng
 									</button>
@@ -79,6 +81,7 @@ foreach ($data['detail_product'] as $item => $value) {
 						</div>
 					</div><!--/product-details-->
 					<?php }?>
+					</form>
 					<div class="category-tab shop-details-tab"><!--category-tab-->
 						<div class="col-sm-12">
 							<ul class="nav nav-tabs">

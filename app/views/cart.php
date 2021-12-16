@@ -42,8 +42,8 @@
 							<td class="cart_quantity">
 								<div class="cart_quantity_button">
 		
-									<input class="cart_quantity_input" type="number" name="quantity" value="<?php echo $cart_item['quantity_product_cart'];?>" autocomplete="off" size="2">
-									
+									<input class="cart_quantity_input" type="number" name="quantity[]" value="<?php echo $cart_item['quantity_product_cart'];?>" autocomplete="off" size="2">
+									<input type="hidden" name="id_product[]" value="<?php echo $cart_item['id_product'];?>">
 								</div>
 							</td>
 							<td class="cart_total">

@@ -87,10 +87,35 @@ class cart extends DController{
 
     public function update()
     {
+        Session::init();
+        $cartmodel = $this->load->model("cartmodel");
         $table = "tbl_cart_deltails";
-        $quantity = $_POST['quantity'];
+        $cart_id = Session::get('cart_id');
+        
+        for($i = 0 ; $i<count($_POST['id_product']) ; $i++){
+            $product_id = $_POST['id_product'][$i];
+            $quantity = $_POST['quantity'][$i];
+            $data = array(
+                'quantity_product_cart' => $quantity
+            );
+            $cond = "id_product = '$product_id' AND id_cart = '$cart_id'";
+            if($quantity <= 0){
+                $result_update = $cartmodel->update_so_am($table, $cond);
+            }else{
+                $result_update = $cartmodel->update_cart($table, $data, $cond);
+            }
+           
+            if($result_update == 1 ){
+                $message['msg'] = "Cập nhật giỏ hàng sản phẩm thành công";
+                header("Location:".BASE_URL."/cart?msg=".urlencode(serialize($message)));
+            }else {
+                $message['msg'] = "Cập nhật giỏ hàng sản phẩm thất bại";
+                header("Location:".BASE_URL."/cart?msg=".urlencode(serialize($message)));
+            }
+        }
+       
+        
         
     }
-    
-
 }
+
