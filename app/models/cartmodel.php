@@ -23,12 +23,18 @@ class cartmodel extends DModel{
     {
         return $this->db->update($table, $data, $cond);
     }
-    public function get_name_category_byid($table_category_product, $table_product, $id)
+    public function getItemCart($table_cart_detail, $table_product , $id_cart)
     {
-        $sql = "SELECT * FROM $table_category_product, $table_product WHERE
-        $table_category_product.id_category_product = $table_product.id_category_product 
-        AND $table_product.id_category_product = '$id' ORDER BY $table_product.id_product DESC LIMIT 1";
+        $sql = "SELECT * FROM $table_cart_detail, $table_product WHERE $table_cart_detail.id_cart = $id_cart AND $table_cart_detail.id_product = $table_product.id_product ORDER BY $table_cart_detail.id_cart_detail DESC";
         return $this->db->select($sql);
+    }
+    public function delete($table_detail, $cond)
+    {
+        return $this->db->delete($table_detail, $cond);
+    }
+    public function update_cart($table, $data, $cond)
+    {
+        return $this->db->update($table, $data, $cond);
     }
 }
 ?>
