@@ -125,15 +125,30 @@
        $this->load->view('taikhoan', $data);
        $this->load->view('footer');
        }
-       public function getInforUser()
-       {
-           Session::init();
-           
-
-       }
+       
        public function update_infor()
        {
-           # code...
+          Session::init();
+          $customermodel = $this->load->model("customermodel");
+          $cus_id = Session::get("customer_id");
+          $table_customer = "tbl_customer";
+          $cond = "customer_id = '$cus_id'";
+          $customer_name = $_POST['hoten'];
+          $customer_phone = $_POST['sodt'];
+          $customer_address = $_POST['diachi'];
+          $data = array(
+            'customer_name' => $customer_name,
+            'customer_phone' => $customer_phone,
+            'customer_address' => $customer_address
+          );
+          $result = $customermodel->update_infor($table_customer, $data, $cond);
+          if($result == 1){
+            $message['msg'] = "Cập nhật thông tin thành công";
+            header("Location:".BASE_URL."/customer/Account?msg=".urlencode(serialize($message)));
+        }else {
+            $message['msg'] = "Cập nhật thông tin thất bại";
+            header("Location:".BASE_URL."/customer/Account?msg=".urlencode(serialize($message)));
+        }
        }
 }
     

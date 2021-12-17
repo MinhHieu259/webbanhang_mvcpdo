@@ -6,6 +6,14 @@
 					<div class="col-sm-6">
 						<div class="shopper-info">
 						<center><p>Cập nhật thông tin cá nhân</p></center>
+						<?php 
+							if(!empty($_GET['msg'])){
+								$msg = unserialize(urldecode($_GET['msg']));
+								foreach ($msg as $item => $value) {
+									echo '<p style="color:green; text-align:center">'.$value.'</p>';
+								}
+							}
+						?>
 						<?php foreach ( $data['user_infor'] as $item => $infor) {
 							?>
 							<form method="POST" action="<?php echo BASE_URL;?>/customer/update_infor">

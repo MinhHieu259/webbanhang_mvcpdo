@@ -31,5 +31,9 @@ class customermodel extends DModel{
  public function getInforUser($sql){
    return $this->db->select($sql);
  }
+ public function update_infor($table, $data, $cond)
+ {
+    return $this->db->update($table, $data, $cond);
+ }
 }
 ?>
