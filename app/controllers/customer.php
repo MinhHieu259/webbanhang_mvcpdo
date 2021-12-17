@@ -108,6 +108,33 @@
                 $message['msg'] = "Đăng xuất thành công";
                 header("Location:".BASE_URL."/customer/dangnhap_dangky?msg=".urlencode(serialize($message)));
        }
+
+       public function Account()
+       {
+        $categorymodel = $this->load->model("categorymodel");
+        $customermodel = $this->load->model("customermodel");
+        $productmodel = $this->load->model("productmodel");
+        $table_category_product = "tbl_category_product";
+        $table_product = "tbl_product";
+        $data['category'] = $categorymodel->category_home($table_category_product);
+        Session::init();
+        $cus_id = Session::get("customer_id");
+        $sql = "SELECT * FROM tbl_customer WHERE customer_id = '$cus_id'";
+        $data['user_infor'] = $customermodel->getInforUser($sql);
+       $this->load->view('header', $data);
+       $this->load->view('taikhoan', $data);
+       $this->load->view('footer');
        }
+       public function getInforUser()
+       {
+           Session::init();
+           
+
+       }
+       public function update_infor()
+       {
+           # code...
+       }
+}
     
 ?>

@@ -28,5 +28,8 @@ class customermodel extends DModel{
  {
     return $this->db->insert($table_cart, $data);
  }
+ public function getInforUser($sql){
+   return $this->db->select($sql);
+ }
 }
 ?>

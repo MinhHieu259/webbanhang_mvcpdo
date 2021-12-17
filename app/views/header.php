@@ -37,9 +37,22 @@
 					<div class="col-md-8 clearfix">
 						<div class="shop-menu clearfix pull-right">
 							<ul class="nav navbar-nav">
-								<li><a href="><i class="fa fa-user"></i> Tài khoản</a></li>
+							<?php 
+									if(Session::get("customer_login") == true){
+							?>
+								<li><a href="<?php echo BASE_URL?>/customer/Account"><i class="fa fa-user"></i> Tài khoản</a></li>
+								<?php }?>
+
+							<?php 
+									if(Session::get("customer_login") == true){
+							?>
 								<li><a href=""><i class="fa fa-star"></i> Yêu thích</a></li>
-								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Thanh toán</a></li>
+								<?php }?>
+								<?php 
+									if(Session::get("customer_login") == true){
+							?>
+								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i>Đơn hàng</a></li>
+								<?php }?>
 								<li><a href="<?php echo BASE_URL;?>/cart"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
 								<?php 
 									if(Session::get("customer_login") == true){
