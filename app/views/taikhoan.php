@@ -1,9 +1,9 @@
 <body>
 	<section >
-		<div class="container" style="margin: 0 auto;">
+		<div class="container">
 			<div class="shopper-informations">
-				<div class="row">
-					<div class="col-sm-6">
+				<div class="row text-center padding">
+					<div class="col-sm-12">
 						<div class="shopper-info">
 						<center><p>Cập nhật thông tin cá nhân</p></center>
 						<?php 
