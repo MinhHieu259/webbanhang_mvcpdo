@@ -79,7 +79,7 @@
 							<li>Tổng thanh toán: <span><?php echo number_format( $tongtien, 0,',','.').' VNĐ';?></span></li>
 						</ul>
 							<button type="submit" class="btn btn-default update" href="">Cập nhật</button>
-							<a href="<?php echo BASE_URL;?>/order" class="btn btn-default check_out" href="">Đặt hàng</a>
+							<a href="<?php echo BASE_URL;?>/order" class="btn btn-default check_out" href="">Thanh toán</a>
 					</div>
 				</div>
 			</div>

@@ -20,7 +20,7 @@
 							<td></td>
 						</tr>
 					</thead>
-					<form action="<?php echo BASE_URL;?>/cart/update" method="POST">
+					
 					<tbody>
 						<?php 
 						$tongtien = 0;
@@ -72,7 +72,7 @@
 				<div class="col-sm-6">
 					<div class="total_area">
                    
-						<center><p>Cập nhật thông tin cá nhân</p></center>
+						<center><p>Thông tin người nhận</p></center>
 						<?php 
 							if(!empty($_GET['msg'])){
 								$msg = unserialize(urldecode($_GET['msg']));
@@ -83,18 +83,13 @@
 						?>
 						<?php foreach ( $data['user_infor'] as $item => $infor) {
 							?>
-                            
-							<form method="POST" action="<?php echo BASE_URL;?>/customer/update_infor">
+							<form action="<?php echo BASE_URL;?>/order/dathang" method="post">
                             <ul>
 							<li style="background-color: white;"><input value="<?php echo $infor['customer_name']?>" name="hoten" type="text" placeholder="Họ Tên"></li>
 							<li style="background-color: white;"><input value="<?php echo $infor['customer_phone']?>" name="sodt" type="text" placeholder="Số điện thoại"></li>
 							<li style="background-color: white;"><input value="<?php echo $infor['customer_address']?>" name="diachi" type="text" placeholder="Địa chỉ"></li>
 							
 						</ul>
-								
-							
-								<button type="submit" class="btn btn-primary" href="">Cập nhật</button>
-							</form>
 						<?php }?>
 						
 					</div>
@@ -108,14 +103,13 @@
 							<li>Phí ship <span>Free</span></li>
 							<li>Tổng thanh toán: <span><?php echo number_format( $tongtien, 0,',','.').' VNĐ';?></span></li>
 						</ul>
-							<button type="submit" class="btn btn-default update" href="">Cập nhật</button>
-							<a class="btn btn-default check_out" href="">Đặt hàng</a>
+							<button type="submit" class="btn btn-default check_out">Đặt hàng</button>
 					</div>
+					</form>
 				</div>
 			</div>
 		</div>
 	</section><!--/#do_action-->
-	</form>
 	<?php }else{
 		echo "";
 	}?>
