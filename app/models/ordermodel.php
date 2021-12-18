@@ -28,5 +28,32 @@ class ordermodel extends DModel{
     {
         return $this->db->delete_many($table, $cond);
     }
+    public function listorder_admin_chuaduyet($table_order)
+    {
+        $sql = "SELECT * FROM $table_order WHERE  order_status = 0 ORDER BY order_id DESC ";
+        return $this->db->select($sql);
+    }
+    public function listorder_admin_daduyet($table_order)
+    {
+        $sql = "SELECT * FROM $table_order WHERE  order_status = 1 ORDER BY order_id DESC ";
+        return $this->db->select($sql);
+    }
+    public function listorder_admin_hoantat($table_order)
+    {
+        $sql = "SELECT * FROM $table_order WHERE  order_status = 2 ORDER BY order_id DESC ";
+        return $this->db->select($sql);
+    }
+    public function duyetdon($table, $data, $cond)
+    {
+        return $this->db->update($table,$data,$cond);
+    }
+    public function hoantat($table, $data, $cond)
+    {
+        return $this->db->update($table,$data,$cond);
+    }
+    public function order_detail($sql)
+    {
+        return $this->db->select($sql);
+    }
  }
 ?>

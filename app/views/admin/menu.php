@@ -28,8 +28,7 @@
                         <span>Đơn hàng</span>
                     </a>
                     <ul class="sub">
-						<li><a href="<?php echo BASE_URL;?>/order/add_order">Thêm mới đơn hàng</a></li>
-						<li><a href="<?php echo BASE_URL;?>/order">Liệt kê đơn hàng</a></li>
+						<li><a href="<?php echo BASE_URL;?>/order/orderAdmin">Liệt kê đơn hàng</a></li>
                     </ul>
                 </li>
 

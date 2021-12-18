@@ -101,7 +101,72 @@
             header("Location:".BASE_URL."/order/ordersuccess?msg=".urlencode(serialize($message)));
         }
        }
-       
+
+       // ADMIN
+       public function orderAdmin()
+       {
+        $table_order = "tbl_order";
+        $table_order_detail = "tbl_order_detail";
+        $ordermodel = $this->load->model('ordermodel');
+        $data['order_chuaduyet'] = $ordermodel->listorder_admin_chuaduyet($table_order);
+        $data['order_daduyet'] = $ordermodel->listorder_admin_daduyet($table_order);
+        $data['order_hoantat'] = $ordermodel->listorder_admin_hoantat($table_order);
+        $this->load->view('admin/header');
+        $this->load->view('admin/menu');
+        $this->load->view('admin/order/order', $data);
+        $this->load->view('admin/footer');
+       }
+       public function duyetdon($order_id)
+       {
+        $ordermodel = $this->load->model('ordermodel');
+        $table_order = "tbl_order";
+        $cond = "order_id = '$order_id'";
+        $data = array(
+            'order_status' => 1
+        );
+        $result = $ordermodel->duyetdon($table_order, $data, $cond);
+        if($result == 1){
+            $message['msg'] = "Duyệt đơn thành công";
+            header("Location:".BASE_URL."/order/orderAdmin?msg=".urlencode(serialize($message)));
+        }else{
+            $message['msg'] = "Duyệt đơn thất bại";
+            header("Location:".BASE_URL."/order/orderAdmin?msg=".urlencode(serialize($message)));
+        }
+       }
+
+       public function hoantat($order_id)
+       {
+        $ordermodel = $this->load->model('ordermodel');
+        $table_order = "tbl_order";
+        $cond = "order_id = '$order_id'";
+        $data = array(
+            'order_status' => 2
+        );
+        $result = $ordermodel->hoantat($table_order, $data, $cond);
+        if($result == 1){
+            $message['msg'] = "Hoàn tất đơn thành công";
+            header("Location:".BASE_URL."/order/orderAdmin?msg=".urlencode(serialize($message)));
+        }else{
+            $message['msg'] = "Hoàn tất đơn thất bại";
+            header("Location:".BASE_URL."/order/orderAdmin?msg=".urlencode(serialize($message)));
+        }
+       }
+       public function chitietdonhang($order_id)
+       {
+           $ordermodel = $this->load->model('ordermodel');
+           $table_order = "tbl_order";
+           $table_order_detail = "tbl_order_detail";
+           $table_order_address = "tbl_order_address";
+           $table_product = "tbl_product";
+           $sql = "SELECT * FROM $table_order, $table_order_address, $table_order_detail, $table_product WHERE
+           $table_order.order_id = $table_order_detail.order_id AND $table_order_detail.product_id = 
+           $table_product.id_product AND $table_order.order_id = $table_order_address.order_id AND $table_order.order_id = $order_id";
+           $data['detail_order'] = $ordermodel->order_detail($sql);
+           $this->load->view('admin/header');
+           $this->load->view('admin/menu');
+           $this->load->view('admin/order/orderDetail', $data);
+           $this->load->view('admin/footer');
+       }
 }
     
 ?>
