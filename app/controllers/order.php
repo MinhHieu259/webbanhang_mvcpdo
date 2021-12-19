@@ -50,7 +50,11 @@
         $sql = "SELECT * FROM tbl_customer WHERE customer_id = '$cus_id'";
         $data['user_infor'] = $customermodel->getInforUser($sql);
         $sql_choxn = "SELECT * FROM $table_order WHERE user_id = '$user_id' AND order_status = 0";
+        $sql_danggiao = "SELECT * FROM $table_order WHERE user_id = '$user_id' AND order_status = 1";
+        $sql_damua = "SELECT * FROM $table_order WHERE user_id = '$user_id' AND order_status = 2";
         $data['order_choxn'] = $ordermodel->getOrderCho($sql_choxn);
+        $data['order_danggiao'] = $ordermodel->getOrderDanggiao($sql_danggiao);
+        $data['order_damua'] = $ordermodel->getOrderDamua($sql_damua);
         $this->load->view('header', $data);
         $this->load->view('donhang', $data);
         $this->load->view('footer');
@@ -121,6 +125,45 @@
         }else {
             $message['msg'] = "Đặt hàng thất bại";
             header("Location:".BASE_URL."/order/ordersuccess?msg=".urlencode(serialize($message)));
+        }
+       }
+
+       public function chitietorder($order_id)
+       {
+        $ordermodel = $this->load->model('ordermodel');
+        $categorymodel = $this->load->model("categorymodel");
+        $table_category_product = "tbl_category_product";
+        $table_order = "tbl_order";
+        $table_order_detail = "tbl_order_detail";
+        $table_product = "tbl_product";
+        $sql = "SELECT * FROM $table_order, $table_order_detail, $table_product WHERE
+           $table_order.order_id = $table_order_detail.order_id AND $table_order_detail.product_id = 
+           $table_product.id_product  AND $table_order.order_id = $order_id";
+           
+        $data['category'] = $categorymodel->category_home($table_category_product);
+        $data['order_details'] = $ordermodel->chitietorder($sql);
+        $this->load->view('header', $data);
+        $this->load->view('chitietdonhang', $data);
+        $this->load->view('footer');
+       }
+       public function huydon($order_id)
+       {
+        $ordermodel = $this->load->model('ordermodel');
+        $table_order = "tbl_order";
+        $table_order_detail = "tbl_order_detail";
+        $table_order_address = "tbl_order_address";
+        $cond_xoa_don = "order_id = '$order_id'";
+        $cond_xoa_ct = "order_id = '$order_id'";
+        $cond_xoa_diachi = "order_id = '$order_id'";
+        $result_xoa = $ordermodel->huydon($table_order, $cond_xoa_don);
+        $result_xoa_ct = $ordermodel->xoachitietdon($table_order_detail, $cond_xoa_ct);
+        $result_xoa_diachi = $ordermodel->xoadiachidon($table_order_address, $cond_xoa_diachi);
+        if($result_xoa == 1 ){
+            $message['msg'] = "Hủy đơn hàng thành công";
+            header("Location:".BASE_URL."/order/listorder?msg=".urlencode(serialize($message)));
+        }else {
+            $message['msg'] = "Hủy đơn hàng thất bại";
+            header("Location:".BASE_URL."/order/listorder?msg=".urlencode(serialize($message)));
         }
        }
 

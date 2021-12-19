@@ -59,5 +59,29 @@ class ordermodel extends DModel{
     {
         return $this->db->select($sql);
     }
+    public function getOrderDanggiao($sql)
+    {
+        return $this->db->select($sql);
+    }
+    public function getOrderDamua($sql)
+    {
+        return $this->db->select($sql);
+    }
+    public function chitietorder($sql)
+    {
+        return $this->db->select($sql);
+    }
+    public function huydon($table, $cond)
+    {
+        return $this->db->delete($table, $cond);
+    }
+    public function xoachitietdon($table, $cond)
+    {
+        return $this->db->delete_many($table, $cond);
+    }
+    public function xoadiachidon($table, $cond)
+    {
+        return $this->db->delete_many($table, $cond);
+    }
  }
 ?>
