@@ -55,5 +55,9 @@ class ordermodel extends DModel{
     {
         return $this->db->select($sql);
     }
+    public function getOrderCho($sql)
+    {
+        return $this->db->select($sql);
+    }
  }
 ?>

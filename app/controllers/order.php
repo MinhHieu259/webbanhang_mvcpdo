@@ -33,7 +33,29 @@
         $this->load->view('order', $data);
         $this->load->view('footer');
        }
-
+       public function listorder()
+       {
+        Session::init();
+        $customermodel = $this->load->model("customermodel");
+        $categorymodel = $this->load->model("categorymodel");
+        $ordermodel = $this->load->model("ordermodel");
+        $table_category_product = "tbl_category_product";
+        $data['category'] = $categorymodel->category_home($table_category_product);
+        $table_detail = "tbl_cart_deltails";
+        $table_product = "tbl_product";
+        $table_order = "tbl_order";
+        $id_cart = Session::get('cart_id');
+        $user_id = Session::get("customer_id");
+        $cus_id = Session::get("customer_id");
+        $sql = "SELECT * FROM tbl_customer WHERE customer_id = '$cus_id'";
+        $data['user_infor'] = $customermodel->getInforUser($sql);
+        $sql_choxn = "SELECT * FROM $table_order WHERE user_id = '$user_id' AND order_status = 0";
+        $data['order_choxn'] = $ordermodel->getOrderCho($sql_choxn);
+        $this->load->view('header', $data);
+        $this->load->view('donhang', $data);
+        $this->load->view('footer');
+       }
+      
        public function ordersuccess()
        {
         Session::init();

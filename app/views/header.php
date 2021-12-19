@@ -51,7 +51,7 @@
 								<?php 
 									if(Session::get("customer_login") == true){
 							?>
-								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i>Đơn hàng</a></li>
+								<li><a href="<?php echo BASE_URL;?>/order/listorder"><i class="fa fa-crosshairs"></i>Đơn hàng</a></li>
 								<?php }?>
 								<li><a href="<?php echo BASE_URL;?>/cart"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
 								<?php 
