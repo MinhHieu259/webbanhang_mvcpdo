@@ -63,6 +63,7 @@ class cart extends DController{
         if($result == 1 ){
             $message['msg'] = "Thêm giỏ hàng sản phẩm thành công";
             header("Location:".BASE_URL."/cart?msg=".urlencode(serialize($message)));
+            
         }else {
             $message['msg'] = "Thêm giỏ hàng sản phẩm thất bại";
             header("Location:".BASE_URL."/cart?msg=".urlencode(serialize($message)));
