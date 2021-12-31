@@ -102,6 +102,18 @@
 
 		});
 	</script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<?php 
+         if(!empty($_GET['msg'])){
+			 ?>
+			 <?php
+			$msg = unserialize(urldecode($_GET['msg']));
+			foreach ($msg as $item => $value) {
+			?>
+				<script>swal('<?php echo $value;?>');</script>
+			
+				<?php }?>
+		<?php }?>
 	<!-- //calendar -->
 </body>
 </html>

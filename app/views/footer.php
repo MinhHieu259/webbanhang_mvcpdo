@@ -89,5 +89,17 @@
 	<script src="<?php echo BASE_URL;?>/public/js/price-range.js"></script>
     <script src="<?php echo BASE_URL;?>/public/js/jquery.prettyPhoto.js"></script>
     <script src="<?php echo BASE_URL;?>/public/js/main.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<?php 
+         if(!empty($_GET['msg'])){
+			 ?>
+			 <?php
+			$msg = unserialize(urldecode($_GET['msg']));
+			foreach ($msg as $item => $value) {
+			?>
+				<script>swal('<?php echo $value;?>');</script>
+			
+				<?php }?>
+		<?php }?>  
 </body>
 </html>

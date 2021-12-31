@@ -13,6 +13,8 @@
     <link href="<?php echo BASE_URL;?>/public/css/animate.css" rel="stylesheet">
 	<link href="<?php echo BASE_URL;?>/public/css/main2.css" rel="stylesheet">
 	<link href="<?php echo BASE_URL;?>/public/css/responsive.css" rel="stylesheet">
+	                      
+    
 	
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
