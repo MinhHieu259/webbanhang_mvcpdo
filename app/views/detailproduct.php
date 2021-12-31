@@ -33,14 +33,12 @@ foreach ($data['detail_product'] as $item => $value) {
 								    <div class="carousel-inner">
 										<div class="item active">
 										  <a href=""><img width="80" src="<?php echo BASE_URL;?>/public/uploads/product/<?php echo $detail['image_product'];?>" alt=""></a>
-										  <a href=""><img src="<?php echo BASE_URL;?>/public/images/product-details/similar2.jpg" alt=""></a>
-										  <a href=""><img src="<?php echo BASE_URL;?>/public/images/product-details/similar3.jpg" alt=""></a>
+										  
 										</div>
 										
 										<div class="item">
 										  <a href=""><img width="60" src="<?php echo BASE_URL;?>/public/uploads/product/<?php echo $detail['image_product'];?>" alt=""></a>
-										  <a href=""><img src="<?php echo BASE_URL;?>/public/images/product-details/similar2.jpg" alt=""></a>
-										  <a href=""><img src="<?php echo BASE_URL;?>/public/images/product-details/similar3.jpg" alt=""></a>
+										 
 										</div>
 										
 									</div>

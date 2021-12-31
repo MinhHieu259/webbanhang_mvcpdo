@@ -86,7 +86,7 @@
 						</div>
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href="<?php echo BASE_URL;?>/index" class="active">Trang chủ</a></li>
+								<li><a href="<?php echo BASE_URL;?>" class="active">Trang chủ</a></li>
 								<li class="dropdown"><a href="#">Danh mục<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
 										<?php 
@@ -99,12 +99,7 @@
 										?>
                                     </ul>
                                 </li> 
-								<li class="dropdown"><a href="#">Thương hiệu<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a href="blog.html">Apple</a></li>
-										
-                                    </ul>
-                                </li> 
+								
 								<li><a href="<?php echo BASE_URL;?>/product/tatcasanpham">Sản phẩm</a></li>
 								<li><a href="<?php echo BASE_URL;?>/index/lienhe">Liên hệ</a></li>
 							</ul>
@@ -112,7 +107,9 @@
 					</div>
 					<div class="col-sm-3">
 						<div class="search_box pull-right">
-							<input type="text" placeholder="Search"/>
+							<form action="" method="post">
+							<input type="text" placeholder="Tìm kiếm"/>
+							</form>
 						</div>
 					</div>
 				</div>
