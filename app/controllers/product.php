@@ -217,8 +217,8 @@
             $customer_id = Session::get("customer_id");
             $check_yeuthich = $productmodel->checkYeuthich($table_yeuthich, $customer_id, $id_sanpham);
             if($customer_id == null){
-                $message['msg'] = "Bạn chưa đăng nhập";
-                header("Location:".BASE_URL."/index?msg=".urlencode(serialize($message)));
+                $message['error'] = "Bạn chưa đăng nhập";
+                header("Location:".BASE_URL."/index?error=".urlencode(serialize($message)));
         
             }else if($customer_id != null && $check_yeuthich == 1){
                
@@ -290,8 +290,8 @@
              if($customer_id != null && $check_comment == 1){
                
                 
-                $message['msg'] = "Bạn chỉ được bình luận 1 lần";
-                header("Location:".BASE_URL."/product/chitietsanpham/$id_product?msg=".urlencode(serialize($message)));
+                $message['error'] = "Bạn chỉ được bình luận 1 lần";
+                header("Location:".BASE_URL."/product/chitietsanpham/$id_product?error=".urlencode(serialize($message)));
                 
             } else{
             $data = array(
