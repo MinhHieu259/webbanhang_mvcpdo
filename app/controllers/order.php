@@ -123,8 +123,8 @@
             $message['msg'] = "Đặt hàng thành công";
             header("Location:".BASE_URL."/order/ordersuccess?msg=".urlencode(serialize($message)));
         }else {
-            $message['msg'] = "Đặt hàng thất bại";
-            header("Location:".BASE_URL."/order/ordersuccess?msg=".urlencode(serialize($message)));
+            $message['error'] = "Đặt hàng thất bại";
+            header("Location:".BASE_URL."/order/ordersuccess?error=".urlencode(serialize($message)));
         }
        }
 
@@ -162,8 +162,8 @@
             $message['msg'] = "Hủy đơn hàng thành công";
             header("Location:".BASE_URL."/order/listorder?msg=".urlencode(serialize($message)));
         }else {
-            $message['msg'] = "Hủy đơn hàng thất bại";
-            header("Location:".BASE_URL."/order/listorder?msg=".urlencode(serialize($message)));
+            $message['error'] = "Hủy đơn hàng thất bại";
+            header("Location:".BASE_URL."/order/listorder?error=".urlencode(serialize($message)));
         }
        }
 
@@ -194,8 +194,8 @@
             $message['msg'] = "Duyệt đơn thành công";
             header("Location:".BASE_URL."/order/orderAdmin?msg=".urlencode(serialize($message)));
         }else{
-            $message['msg'] = "Duyệt đơn thất bại";
-            header("Location:".BASE_URL."/order/orderAdmin?msg=".urlencode(serialize($message)));
+            $message['error'] = "Duyệt đơn thất bại";
+            header("Location:".BASE_URL."/order/orderAdmin?error=".urlencode(serialize($message)));
         }
        }
 
@@ -212,8 +212,8 @@
             $message['msg'] = "Hoàn tất đơn thành công";
             header("Location:".BASE_URL."/order/orderAdmin?msg=".urlencode(serialize($message)));
         }else{
-            $message['msg'] = "Hoàn tất đơn thất bại";
-            header("Location:".BASE_URL."/order/orderAdmin?msg=".urlencode(serialize($message)));
+            $message['error'] = "Hoàn tất đơn thất bại";
+            header("Location:".BASE_URL."/order/orderAdmin?error=".urlencode(serialize($message)));
         }
        }
        public function chitietdonhang($order_id)

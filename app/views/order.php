@@ -70,7 +70,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-6">
-					<div class="total_area">
+					<div class="total_area" style="height: 300px;">
                    
 						<center><p>Thông tin người nhận</p></center>
 						<?php 
@@ -84,11 +84,11 @@
 						<?php foreach ( $data['user_infor'] as $item => $infor) {
 							?>
 							<form action="<?php echo BASE_URL;?>/order/dathang" method="post">
-                            <ul>
-							<li style="background-color: white;"><input value="<?php echo $infor['customer_name']?>" name="hoten" type="text" placeholder="Họ Tên"></li>
-							<li style="background-color: white;"><input value="<?php echo $infor['customer_phone']?>" name="sodt" type="text" placeholder="Số điện thoại"></li>
-							<li style="background-color: white;"><input value="<?php echo $infor['customer_address']?>" name="diachi" type="text" placeholder="Địa chỉ"></li>
 							
+                            <ul>
+							<li  style="background-color: white;"><input size="55" value="<?php echo $infor['customer_name']?>" name="hoten" type="text" placeholder="Họ Tên"></li>
+							<li style="background-color: white;"><input size="55" value="<?php echo $infor['customer_phone']?>" name="sodt" type="text" placeholder="Số điện thoại"></li>
+							<li style="background-color: white;"><input size="55" value="<?php echo $infor['customer_address']?>" name="diachi" type="text" placeholder="Địa chỉ"></li>
 						</ul>
 						<?php }?>
 						
@@ -96,14 +96,14 @@
 				</div>
 
                 <div class="col-sm-6">
-					<div class="total_area">
+					<div class="total_area" style="height: 300px;">
 						<ul>
 							<li>Tổng tiền: <span><?php echo number_format( $tongtien, 0,',','.').' VNĐ';?></span></li>
 							<li>Thuế <span>0%</span></li>
 							<li>Phí ship <span>Free</span></li>
 							<li>Tổng thanh toán: <span><?php echo number_format( $tongtien, 0,',','.').' VNĐ';?></span></li>
 						</ul>
-							<button type="submit" class="btn btn-default check_out">Đặt hàng</button>
+							<center><button type="submit" class="btn btn-default check_out">Đặt hàng</button></center>
 					</div>
 					</form>
 				</div>

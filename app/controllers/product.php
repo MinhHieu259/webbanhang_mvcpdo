@@ -51,8 +51,8 @@
                 $message['msg'] = "Thêm sản phẩm thành công";
                 header("Location:".BASE_URL."/product/list_product?msg=".urlencode(serialize($message)));
             }else {
-                $message['msg'] = "Thêm sản phẩm thất bại";
-                header("Location:".BASE_URL."/product/list_product?msg=".urlencode(serialize($message)));
+                $message['error'] = "Thêm sản phẩm thất bại";
+                header("Location:".BASE_URL."/product/list_product?error=".urlencode(serialize($message)));
             }
         }
       
@@ -78,8 +78,8 @@
                 $message['msg'] = "Xóa sản phẩm thành công";
                 header("Location:".BASE_URL."/product/list_product?msg=".urlencode(serialize($message)));
             }else {
-                $message['msg'] = "Xóa sản phẩm thất bại";
-                header("Location:".BASE_URL."/product/list_product?msg=".urlencode(serialize($message)));
+                $message['error'] = "Xóa sản phẩm thất bại";
+                header("Location:".BASE_URL."/product/list_product?error=".urlencode(serialize($message)));
             }
         }
         public function edit_product($id)
@@ -149,8 +149,8 @@
                 $message['msg'] = "Cập nhật sản phẩm thành công";
                 header("Location:".BASE_URL."/product/list_product?msg=".urlencode(serialize($message)));
             }else {
-                $message['msg'] = "Cập nhật sản phẩm thất bại";
-                header("Location:".BASE_URL."/product/list_product?msg=".urlencode(serialize($message)));
+                $message['error'] = "Cập nhật sản phẩm thất bại";
+                header("Location:".BASE_URL."/product/list_product?error=".urlencode(serialize($message)));
             }
         }
 
@@ -223,8 +223,8 @@
             }else if($customer_id != null && $check_yeuthich == 1){
                
                 
-                $message['msg'] = "Sản phẩm đã có trong yêu thích rồi";
-                header("Location:".BASE_URL."?msg=".urlencode(serialize($message)));
+                $message['warning'] = "Sản phẩm đã có trong yêu thích rồi";
+                header("Location:".BASE_URL."?warning=".urlencode(serialize($message)));
                 
             } else{
             $data = array(
@@ -238,8 +238,8 @@
                 header("Location:".BASE_URL."/product/sanphamyeuthich/?msg=".urlencode(serialize($message)));
                 
             }else {
-                $message['msg'] = "Thêm yêu thích sản phẩm thất bại";
-                header("Location:".BASE_URL."/product/sanphamyeuthich/?msg=".urlencode(serialize($message)));
+                $message['error'] = "Thêm yêu thích sản phẩm thất bại";
+                header("Location:".BASE_URL."/product/sanphamyeuthich/?error=".urlencode(serialize($message)));
             }
             }
             
@@ -275,8 +275,8 @@
                 header("Location:".BASE_URL."/product/sanphamyeuthich/?msg=".urlencode(serialize($message)));
                 
             }else {
-                $message['msg'] = "Xóa yêu thích sản phẩm thất bại";
-                header("Location:".BASE_URL."/product/sanphamyeuthich/?msg=".urlencode(serialize($message)));
+                $message['error'] = "Xóa yêu thích sản phẩm thất bại";
+                header("Location:".BASE_URL."/product/sanphamyeuthich/?error=".urlencode(serialize($message)));
             }
         }
 
@@ -306,8 +306,8 @@
                 header("Location:".BASE_URL."/product/chitietsanpham/$id_product?msg=".urlencode(serialize($message)));
                 
             }else {
-                $message['msg'] = "Bình luận thất bại";
-                header("Location:".BASE_URL."/product/chitietsanpham/$id_product?msg=".urlencode(serialize($message)));
+                $message['error'] = "Bình luận thất bại";
+                header("Location:".BASE_URL."/product/chitietsanpham/$id_product?error=".urlencode(serialize($message)));
             }
             }
 

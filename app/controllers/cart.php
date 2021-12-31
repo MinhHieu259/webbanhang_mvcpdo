@@ -37,8 +37,8 @@ class cart extends DController{
         $product_quantity = $_POST['product_quantity'];
         $check_cart = $cartmodel->checkCart($table_detail, $id_cart, $id_product);
         if($customer_id == null){
-            $message['msg'] = "Bạn chưa đăng nhập";
-            header("Location:".BASE_URL."/index?msg=".urlencode(serialize($message)));
+            $message['error'] = "Bạn chưa đăng nhập";
+            header("Location:".BASE_URL."/index?error=".urlencode(serialize($message)));
     
         }else if($customer_id != null && $check_cart == 1){
             $info_item = $cartmodel->getItemCartById($table_detail, $id_cart, $id_product);
@@ -65,8 +65,8 @@ class cart extends DController{
             header("Location:".BASE_URL."/cart?msg=".urlencode(serialize($message)));
             
         }else {
-            $message['msg'] = "Thêm giỏ hàng sản phẩm thất bại";
-            header("Location:".BASE_URL."/cart?msg=".urlencode(serialize($message)));
+            $message['error'] = "Thêm giỏ hàng sản phẩm thất bại";
+            header("Location:".BASE_URL."/cart?error=".urlencode(serialize($message)));
         }
         }
     }
@@ -81,8 +81,8 @@ class cart extends DController{
             $message['msg'] = "Xóa danh mục sản phẩm thành công";
             header("Location:".BASE_URL."/cart?msg=".urlencode(serialize($message)));
         }else {
-            $message['msg'] = "Xóa danh mục sản phẩm thất bại";
-            header("Location:".BASE_URL."/cart?msg=".urlencode(serialize($message)));
+            $message['error'] = "Xóa danh mục sản phẩm thất bại";
+            header("Location:".BASE_URL."/cart?error=".urlencode(serialize($message)));
         }
     }
 
@@ -110,8 +110,8 @@ class cart extends DController{
                 $message['msg'] = "Cập nhật giỏ hàng sản phẩm thành công";
                 header("Location:".BASE_URL."/cart?msg=".urlencode(serialize($message)));
             }else {
-                $message['msg'] = "Cập nhật giỏ hàng sản phẩm thất bại";
-                header("Location:".BASE_URL."/cart?msg=".urlencode(serialize($message)));
+                $message['error'] = "Cập nhật giỏ hàng sản phẩm thất bại";
+                header("Location:".BASE_URL."/error?msg=".urlencode(serialize($message)));
             }
         }
        

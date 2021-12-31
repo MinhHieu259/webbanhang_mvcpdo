@@ -107,13 +107,37 @@
          if(!empty($_GET['msg'])){
 			 ?>
 			 <?php
+			 if(isset($_GET['msg'])){
 			$msg = unserialize(urldecode($_GET['msg']));
 			foreach ($msg as $item => $value) {
 			?>
-				<script>swal('<?php echo $value;?>');</script>
+				<script>swal("Thành công!", "<?php echo $value;?>", "success");</script>
 			
-				<?php }?>
-		<?php }?>
+				<?php }}}?>
+	
+		<?php 
+         if(!empty($_GET['error'])){
+			 ?>
+			 <?php
+			 if(isset($_GET['error'])){
+			$msg = unserialize(urldecode($_GET['error']));
+			foreach ($msg as $item => $value) {
+			?>
+				<script>swal("Thất bại!", "<?php echo $value;?>", "error");</script>
+			
+				<?php }}}?>	
+
+				<?php 
+         if(!empty($_GET['warning'])){
+			 ?>
+			 <?php
+			 if(isset($_GET['warning'])){
+			$msg = unserialize(urldecode($_GET['warning']));
+			foreach ($msg as $item => $value) {
+			?>
+				<script>swal("Thất bại!", "<?php echo $value;?>", "warning");</script>
+			
+				<?php }}}?>
 	<!-- //calendar -->
 </body>
 </html>

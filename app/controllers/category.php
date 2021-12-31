@@ -28,8 +28,8 @@
                 $message['msg'] = "Xóa danh mục sản phẩm thành công";
                 header("Location:".BASE_URL."/category/list_category?msg=".urlencode(serialize($message)));
             }else {
-                $message['msg'] = "Xóa danh mục sản phẩm thất bại";
-                header("Location:".BASE_URL."/category/list_category?msg=".urlencode(serialize($message)));
+                $message['error'] = "Xóa danh mục sản phẩm thất bại";
+                header("Location:".BASE_URL."/category/list_category?error=".urlencode(serialize($message)));
             }
         }
 
@@ -72,8 +72,8 @@
                 $message['msg'] = "Thêm danh mục sản phẩm thành công";
                 header("Location:".BASE_URL."/category/list_category?msg=".urlencode(serialize($message)));
             }else {
-                $message['msg'] = "Thêm danh mục sản phẩm thất bại";
-                header("Location:".BASE_URL."/category/list_category?msg=".urlencode(serialize($message)));
+                $message['error'] = "Thêm danh mục sản phẩm thất bại";
+                header("Location:".BASE_URL."/category/list_category?error=".urlencode(serialize($message)));
             }
         }
 
@@ -105,8 +105,8 @@
                 $message['msg'] = "Cập nhật danh mục sản phẩm thành công";
                 header("Location:".BASE_URL."/category/list_category?msg=".urlencode(serialize($message)));
             }else {
-                $message['msg'] = "Cập nhật danh mục sản phẩm thất bại";
-                header("Location:".BASE_URL."/category/list_category?msg=".urlencode(serialize($message)));
+                $message['error'] = "Cập nhật danh mục sản phẩm thất bại";
+                header("Location:".BASE_URL."/category/list_category?error=".urlencode(serialize($message)));
             }
         }
         

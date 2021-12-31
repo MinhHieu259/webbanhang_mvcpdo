@@ -34,8 +34,8 @@
         $count = $customermodel->dangnhap($table_customer, $username, $password);
 
         if($count == 0){
-            $message['msg'] = "Tài khoản hoặc mật khẩu không đúng";
-            header("Location:".BASE_URL."/customer/dangnhap_dangky?msg=".urlencode(serialize($message)));
+            $message['error'] = "Tài khoản hoặc mật khẩu không đúng";
+            header("Location:".BASE_URL."/customer/dangnhap_dangky?error=".urlencode(serialize($message)));
         }else {
            $result = $customermodel->getLogin($table_customer, $table_cart, $username, $password);
            Session::init();
@@ -93,8 +93,8 @@
             $message['msg'] = "Đăng ký thành công";
             header("Location:".BASE_URL."/customer/dangnhap_dangky?msg=".urlencode(serialize($message)));
         }else {
-            $message['msg'] = "Đăng ký thất bại";
-            header("Location:".BASE_URL."/customer/dangnhap_dangky?msg=".urlencode(serialize($message)));
+            $message['error'] = "Đăng ký thất bại";
+            header("Location:".BASE_URL."/customer/dangnhap_dangky?error=".urlencode(serialize($message)));
         }
        }
        
@@ -146,8 +146,8 @@
             $message['msg'] = "Cập nhật thông tin thành công";
             header("Location:".BASE_URL."/customer/Account?msg=".urlencode(serialize($message)));
         }else {
-            $message['msg'] = "Cập nhật thông tin thất bại";
-            header("Location:".BASE_URL."/customer/Account?msg=".urlencode(serialize($message)));
+            $message['error'] = "Cập nhật thông tin thất bại";
+            header("Location:".BASE_URL."/customer/Account?error=".urlencode(serialize($message)));
         }
        }
 }
