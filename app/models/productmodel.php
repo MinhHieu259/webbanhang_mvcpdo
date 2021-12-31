@@ -54,5 +54,26 @@ class productmodel extends DModel{
     $sql = "SELECT * FROM $table_product, $table_category_product WHERE $cond_relate";
     return $this->db->select($sql);
  }
+
+ public function checkYeuthich($table, $id_customer, $id_product)
+ {
+     $sql = "SELECT * FROM $table WHERE id_customer= ? AND id_product = ?";
+     return $this->db->affectedRows($sql, $id_customer, $id_product);
+ }
+
+ public function add_yeuthich($table, $data)
+ {
+    return $this->db->insert($table, $data);
+ }
+
+ public function list_yeuthich($table, $table_product, $cond)
+ {
+     $sql = "SELECT * FROM $table, $table_product WHERE $cond";
+     return $this->db->select($sql);
+ }
+ public function delete_yeuthich($table, $cond)
+ {
+    return $this->db->delete($table, $cond);
+ }
 }
 ?>

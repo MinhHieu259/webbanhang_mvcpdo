@@ -203,6 +203,76 @@
             $this->load->view("footer");
         }
        
+        public function add_yeuthich($id_sanpham)
+        {
+            Session::init();
+            $productmodel = $this->load->model("productmodel");
+            $table_yeuthich = "tbl_yeuthich";
+            $customer_id = Session::get("customer_id");
+            $check_yeuthich = $productmodel->checkYeuthich($table_yeuthich, $customer_id, $id_sanpham);
+            if($customer_id == null){
+                $message['msg'] = "Bạn chưa đăng nhập";
+                header("Location:".BASE_URL."/index?msg=".urlencode(serialize($message)));
+        
+            }else if($customer_id != null && $check_yeuthich == 1){
+               
+                
+                $message['msg'] = "Sản phẩm đã có trong yêu thích rồi";
+                header("Location:".BASE_URL."?msg=".urlencode(serialize($message)));
+                
+            } else{
+            $data = array(
+                'id_customer' => $customer_id,
+                'id_product' => $id_sanpham,
+            );
+            
+            $result = $productmodel->add_yeuthich($table_yeuthich, $data);
+            if($result == 1 ){
+                $message['msg'] = "Thêm yêu thích sản phẩm thành công";
+                header("Location:".BASE_URL."/product/sanphamyeuthich/?msg=".urlencode(serialize($message)));
+                
+            }else {
+                $message['msg'] = "Thêm yêu thích sản phẩm thất bại";
+                header("Location:".BASE_URL."/product/sanphamyeuthich/?msg=".urlencode(serialize($message)));
+            }
+            }
+            
+        }
+
+        public function sanphamyeuthich()
+        {
+            $categorymodel = $this->load->model("categorymodel");
+            $productmodel = $this->load->model("productmodel");
+            $table_category_product = "tbl_category_product";
+            $table_product = "tbl_product";
+            $table_yeuthich = "tbl_yeuthich";
+            $data['category'] = $categorymodel->category_home($table_category_product);
+            
+            Session::init();
+            $customer_id = Session::get("customer_id");
+            $cond = "$table_yeuthich.id_product = $table_product.id_product AND $table_yeuthich.id_customer= '$customer_id' 
+            ORDER BY $table_yeuthich.id_yeuthich DESC";
+            $data['list_yeuthich'] = $productmodel->list_yeuthich($table_yeuthich, $table_product, $cond);
+            $this->load->view("header",$data);
+            $this->load->view("spyeuthich", $data);
+            $this->load->view("footer");
+        }
+
+        public function delete_yeuthich($id_yeuthich)
+        {
+            $productmodel = $this->load->model("productmodel");
+            $table_yeuthich = "tbl_yeuthich";
+            $cond = "id_yeuthich = '$id_yeuthich'";
+            $result = $productmodel->delete_yeuthich($table_yeuthich, $cond);
+            if($result == 1 ){
+                $message['msg'] = "Xóa yêu thích sản phẩm thành công";
+                header("Location:".BASE_URL."/product/sanphamyeuthich/?msg=".urlencode(serialize($message)));
+                
+            }else {
+                $message['msg'] = "Xóa yêu thích sản phẩm thất bại";
+                header("Location:".BASE_URL."/product/sanphamyeuthich/?msg=".urlencode(serialize($message)));
+            }
+        }
     }
     
 ?>

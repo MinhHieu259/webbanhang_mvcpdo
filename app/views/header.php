@@ -47,7 +47,7 @@
 							<?php 
 									if(Session::get("customer_login") == true){
 							?>
-								<li><a href=""><i class="fa fa-star"></i> Yêu thích</a></li>
+								<li><a href="<?php echo BASE_URL;?>/product/sanphamyeuthich"><i class="fa fa-star"></i> Yêu thích</a></li>
 								<?php }?>
 								<?php 
 									if(Session::get("customer_login") == true){
