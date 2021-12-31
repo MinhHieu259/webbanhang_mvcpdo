@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 31, 2021 lúc 06:17 AM
+-- Thời gian đã tạo: Th12 31, 2021 lúc 09:40 AM
 -- Phiên bản máy phục vụ: 10.4.18-MariaDB
 -- Phiên bản PHP: 8.0.3
 
@@ -57,7 +57,8 @@ CREATE TABLE `tbl_cart` (
 
 INSERT INTO `tbl_cart` (`id_cart`, `user_id`) VALUES
 (1, 1),
-(2, 2);
+(2, 2),
+(3, 3);
 
 -- --------------------------------------------------------
 
@@ -136,7 +137,8 @@ CREATE TABLE `tbl_customer` (
 
 INSERT INTO `tbl_customer` (`customer_id`, `customer_name`, `customer_phone`, `customer_email`, `customer_password`, `customer_address`) VALUES
 (1, 'Nguyễn Minh Hiếu', '0774452227', 'mhieu7252@gmail.com', '12345678', 'Phong Điền, Thừa thiên huế'),
-(2, 'Hieu Nguyen', '0329568259', 'mhieu@gmail.com', '12345678', 'Huế');
+(2, 'Hieu Nguyen', '0329568259', 'mhieu@gmail.com', '12345678', 'Huế'),
+(3, 'Hiếu Nguyễn', '12444444', 'minhhieu.it.ute@gmail.com', '12345678', 'Huế');
 
 -- --------------------------------------------------------
 
@@ -258,7 +260,8 @@ CREATE TABLE `tbl_yeuthich` (
 --
 
 INSERT INTO `tbl_yeuthich` (`id_yeuthich`, `id_customer`, `id_product`) VALUES
-(3, 1, 5);
+(3, 1, 5),
+(5, 3, 5);
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -274,13 +277,16 @@ ALTER TABLE `tbl_admin`
 -- Chỉ mục cho bảng `tbl_cart`
 --
 ALTER TABLE `tbl_cart`
-  ADD PRIMARY KEY (`id_cart`);
+  ADD PRIMARY KEY (`id_cart`),
+  ADD KEY `foreign_key_cus_id_cart` (`user_id`);
 
 --
 -- Chỉ mục cho bảng `tbl_cart_deltails`
 --
 ALTER TABLE `tbl_cart_deltails`
-  ADD PRIMARY KEY (`id_cart_detail`);
+  ADD PRIMARY KEY (`id_cart_detail`),
+  ADD KEY `foreign_key_id_cart_detail` (`id_cart`),
+  ADD KEY `foreign_key_id_product_cart` (`id_product`);
 
 --
 -- Chỉ mục cho bảng `tbl_category_product`
@@ -292,7 +298,9 @@ ALTER TABLE `tbl_category_product`
 -- Chỉ mục cho bảng `tbl_comment`
 --
 ALTER TABLE `tbl_comment`
-  ADD PRIMARY KEY (`id_comment`);
+  ADD PRIMARY KEY (`id_comment`),
+  ADD KEY `foreign_key_id_cus_comment` (`id_customer`),
+  ADD KEY `foreign_key_id_product_comment` (`id_product`);
 
 --
 -- Chỉ mục cho bảng `tbl_customer`
@@ -304,31 +312,38 @@ ALTER TABLE `tbl_customer`
 -- Chỉ mục cho bảng `tbl_order`
 --
 ALTER TABLE `tbl_order`
-  ADD PRIMARY KEY (`order_id`);
+  ADD PRIMARY KEY (`order_id`),
+  ADD KEY `foreign_key_id_cus_order` (`user_id`);
 
 --
 -- Chỉ mục cho bảng `tbl_order_address`
 --
 ALTER TABLE `tbl_order_address`
-  ADD PRIMARY KEY (`id_address`);
+  ADD PRIMARY KEY (`id_address`),
+  ADD KEY `foreign_key_id_order_address` (`order_id`);
 
 --
 -- Chỉ mục cho bảng `tbl_order_detail`
 --
 ALTER TABLE `tbl_order_detail`
-  ADD PRIMARY KEY (`order_detail_id`);
+  ADD PRIMARY KEY (`order_detail_id`),
+  ADD KEY `foreign_key_id_order_detail` (`order_id`),
+  ADD KEY `foreign_key_id_product_odetail` (`product_id`);
 
 --
 -- Chỉ mục cho bảng `tbl_product`
 --
 ALTER TABLE `tbl_product`
-  ADD PRIMARY KEY (`id_product`);
+  ADD PRIMARY KEY (`id_product`),
+  ADD KEY `foreign_key_idcate_pro` (`id_category_product`);
 
 --
 -- Chỉ mục cho bảng `tbl_yeuthich`
 --
 ALTER TABLE `tbl_yeuthich`
-  ADD PRIMARY KEY (`id_yeuthich`);
+  ADD PRIMARY KEY (`id_yeuthich`),
+  ADD KEY `foreign_key_id_cus_yeuthich` (`id_customer`),
+  ADD KEY `foreign_key_id_product_yt` (`id_product`);
 
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
@@ -344,13 +359,13 @@ ALTER TABLE `tbl_admin`
 -- AUTO_INCREMENT cho bảng `tbl_cart`
 --
 ALTER TABLE `tbl_cart`
-  MODIFY `id_cart` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_cart` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_cart_deltails`
 --
 ALTER TABLE `tbl_cart_deltails`
-  MODIFY `id_cart_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_cart_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_category_product`
@@ -368,25 +383,25 @@ ALTER TABLE `tbl_comment`
 -- AUTO_INCREMENT cho bảng `tbl_customer`
 --
 ALTER TABLE `tbl_customer`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_order`
 --
 ALTER TABLE `tbl_order`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_order_address`
 --
 ALTER TABLE `tbl_order_address`
-  MODIFY `id_address` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_address` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_order_detail`
 --
 ALTER TABLE `tbl_order_detail`
-  MODIFY `order_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `order_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_product`
@@ -398,7 +413,63 @@ ALTER TABLE `tbl_product`
 -- AUTO_INCREMENT cho bảng `tbl_yeuthich`
 --
 ALTER TABLE `tbl_yeuthich`
-  MODIFY `id_yeuthich` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_yeuthich` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- Các ràng buộc cho các bảng đã đổ
+--
+
+--
+-- Các ràng buộc cho bảng `tbl_cart`
+--
+ALTER TABLE `tbl_cart`
+  ADD CONSTRAINT `foreign_key_cus_id_cart` FOREIGN KEY (`user_id`) REFERENCES `tbl_customer` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `tbl_cart_deltails`
+--
+ALTER TABLE `tbl_cart_deltails`
+  ADD CONSTRAINT `foreign_key_id_cart_detail` FOREIGN KEY (`id_cart`) REFERENCES `tbl_cart` (`id_cart`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `foreign_key_id_product_cart` FOREIGN KEY (`id_product`) REFERENCES `tbl_product` (`id_product`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `tbl_comment`
+--
+ALTER TABLE `tbl_comment`
+  ADD CONSTRAINT `foreign_key_id_cus_comment` FOREIGN KEY (`id_customer`) REFERENCES `tbl_customer` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `foreign_key_id_product_comment` FOREIGN KEY (`id_product`) REFERENCES `tbl_product` (`id_product`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `tbl_order`
+--
+ALTER TABLE `tbl_order`
+  ADD CONSTRAINT `foreign_key_id_cus_order` FOREIGN KEY (`user_id`) REFERENCES `tbl_customer` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `tbl_order_address`
+--
+ALTER TABLE `tbl_order_address`
+  ADD CONSTRAINT `foreign_key_id_order_address` FOREIGN KEY (`order_id`) REFERENCES `tbl_order` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `tbl_order_detail`
+--
+ALTER TABLE `tbl_order_detail`
+  ADD CONSTRAINT `foreign_key_id_order_detail` FOREIGN KEY (`order_id`) REFERENCES `tbl_order` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `foreign_key_id_product_odetail` FOREIGN KEY (`product_id`) REFERENCES `tbl_product` (`id_product`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `tbl_product`
+--
+ALTER TABLE `tbl_product`
+  ADD CONSTRAINT `foreign_key_idcate_pro` FOREIGN KEY (`id_category_product`) REFERENCES `tbl_category_product` (`id_category_product`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `tbl_yeuthich`
+--
+ALTER TABLE `tbl_yeuthich`
+  ADD CONSTRAINT `foreign_key_id_cus_yeuthich` FOREIGN KEY (`id_customer`) REFERENCES `tbl_customer` (`customer_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `foreign_key_id_product_yt` FOREIGN KEY (`id_product`) REFERENCES `tbl_product` (`id_product`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
