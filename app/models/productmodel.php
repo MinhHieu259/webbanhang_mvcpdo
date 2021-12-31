@@ -75,5 +75,20 @@ class productmodel extends DModel{
  {
     return $this->db->delete($table, $cond);
  }
+ public function checkComment($table, $id_customer, $id_product)
+ {
+     $sql = "SELECT * FROM $table WHERE id_customer= ? AND id_product = ?";
+     return $this->db->affectedRows($sql, $id_customer, $id_product);
+ }
+ public function add_comment($table, $data)
+ {
+    return $this->db->insert($table, $data);
+ }
+
+ public function show_comment($table_customer, $table_comment, $cond )
+ {
+    $sql = "SELECT * FROM $table_customer, $table_comment WHERE $cond";
+    return $this->db->select($sql);
+ }
 }
 ?>

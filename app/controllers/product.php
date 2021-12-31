@@ -183,10 +183,13 @@
         }
         public function chitietsanpham($id)
         {
+            Session::init();
             $categorymodel = $this->load->model("categorymodel");
             $productmodel = $this->load->model("productmodel");
             $table_category_product = "tbl_category_product";
             $table_product = "tbl_product";
+            $table_comment = "tbl_comment";
+            $table_customer = "tbl_customer";
             $cond = "$table_product.id_category_product = $table_category_product.id_category_product AND $table_product.id_product = '$id'";
         
             $data['category'] = $categorymodel->category_home($table_category_product);
@@ -197,7 +200,10 @@
             $cond_relate = "$table_product.id_category_product = $table_category_product.id_category_product AND $table_category_product.id_category_product = '$id_cate' 
             AND $table_product.id_product NOT IN('$id')  ORDER BY $table_product.id_product DESC LIMIT 3";
             $data['relate_product'] = $productmodel->relate_product_home($table_product,$table_category_product, $cond_relate);
-            Session::init();
+            $customer_id = Session::get("customer_id");
+            $cond_comment = "$table_comment.id_customer = $table_customer.customer_id AND $table_comment.id_product = $id";
+            $data['comment'] = $productmodel->show_comment($table_customer, $table_comment, $cond_comment );
+           
             $this->load->view("header",$data);
             $this->load->view("detailproduct", $data);
             $this->load->view("footer");
@@ -272,6 +278,39 @@
                 $message['msg'] = "Xóa yêu thích sản phẩm thất bại";
                 header("Location:".BASE_URL."/product/sanphamyeuthich/?msg=".urlencode(serialize($message)));
             }
+        }
+
+        public function binhluan($id_product)
+        {
+            Session::init();
+            $productmodel = $this->load->model("productmodel");
+            $customer_id = Session::get("customer_id");
+            $table_comment = "tbl_comment";
+            $check_comment = $productmodel->checkComment($table_comment, $customer_id, $id_product);
+             if($customer_id != null && $check_comment == 1){
+               
+                
+                $message['msg'] = "Bạn chỉ được bình luận 1 lần";
+                header("Location:".BASE_URL."/product/chitietsanpham/$id_product?msg=".urlencode(serialize($message)));
+                
+            } else{
+            $data = array(
+                'id_customer' => $customer_id,
+                'id_product' => $id_product,
+                'content' => $_POST['text_comment']
+            );
+            
+            $result = $productmodel->add_comment($table_comment, $data);
+            if($result == 1 ){
+                $message['msg'] = "Bình luận thành công";
+                header("Location:".BASE_URL."/product/chitietsanpham/$id_product?msg=".urlencode(serialize($message)));
+                
+            }else {
+                $message['msg'] = "Bình luận thất bại";
+                header("Location:".BASE_URL."/product/chitietsanpham/$id_product?msg=".urlencode(serialize($message)));
+            }
+            }
+
         }
     }
     

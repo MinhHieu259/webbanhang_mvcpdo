@@ -100,12 +100,13 @@ foreach ($data['detail_product'] as $item => $value) {
 							</div>
 							
 							<div class="tab-pane fade active in" id="reviews" >
+							<div class="row">
 								<div class="col-sm-12">
 									
-									
+									<?php if(Session::get("customer_id")!= null){?>
 									<p><b>Viết đánh giá</b></p>
 									
-									<form action="#">
+									<form method="POST" action="<?php echo BASE_URL;?>/product/binhluan/<?php echo $detail['id_product'];?>">
 										
 										<textarea name="text_comment" ></textarea>
 	
@@ -113,7 +114,50 @@ foreach ($data['detail_product'] as $item => $value) {
 											Đánh giá
 										</button>
 									</form>
+										<?php }?>
+										
+										
 								</div>
+							</div>
+							<div class="row">
+							<div class="panel panel-default widget">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-comment"></span>
+                <h3 class="panel-title">
+                    Danh sách bình luận</h3>
+                <span class="label label-info">
+                    78</span>
+            </div>
+            <div class="panel-body">
+                <ul class="list-group">
+					<?php if($data['comment'] != null){?>
+				<?php foreach ($data['comment'] as $item => $comment) {?>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-2 col-md-1">
+                                <img src="http://placehold.it/80" class="img-circle img-responsive" alt="" /></div>
+                            <div class="col-xs-10 col-md-11">
+                                <div>
+                                    
+                                    <div class="mic-info">
+                                        By: <a href="#"><?php echo $comment['customer_name']?></a> 
+                                    </div>
+                                </div>
+                                <div class="comment-text">
+								<?php echo $comment['content']?>
+                                </div>
+                               
+                            </div>
+                        </div>
+                    </li>
+					<?php }?>
+					<?php }else{ echo '<center><span style="color:blue;">Chưa có bình luận nào</span></center>';}?>
+                </ul>
+                <a href="#" class="btn btn-primary btn-sm btn-block" role="button"><span class="glyphicon glyphicon-refresh"></span> Xem thêm</a>
+            </div>
+        </div>
+							</div>
+								
 							</div>
 							
 						</div>
