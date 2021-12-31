@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 31, 2021 lúc 05:04 AM
+-- Thời gian đã tạo: Th12 31, 2021 lúc 06:17 AM
 -- Phiên bản máy phục vụ: 10.4.18-MariaDB
 -- Phiên bản PHP: 8.0.3
 
@@ -93,6 +93,27 @@ INSERT INTO `tbl_category_product` (`id_category_product`, `title_category_produ
 (2, 'Điện thoại', 'Điện thoại các loại đẹp'),
 (3, 'Đồng hồ', 'Đồng hồ tốt bậc nhất Việt Nam'),
 (4, 'Tivi', 'Tivi các loại tốt nhất');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `tbl_comment`
+--
+
+CREATE TABLE `tbl_comment` (
+  `id_comment` int(11) NOT NULL,
+  `id_customer` int(11) NOT NULL,
+  `id_product` int(11) NOT NULL,
+  `content` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `tbl_comment`
+--
+
+INSERT INTO `tbl_comment` (`id_comment`, `id_customer`, `id_product`, `content`) VALUES
+(2, 1, 5, 'Máy đẹp quá :D'),
+(3, 1, 4, 'Máy quá tệ ');
 
 -- --------------------------------------------------------
 
@@ -268,6 +289,12 @@ ALTER TABLE `tbl_category_product`
   ADD PRIMARY KEY (`id_category_product`);
 
 --
+-- Chỉ mục cho bảng `tbl_comment`
+--
+ALTER TABLE `tbl_comment`
+  ADD PRIMARY KEY (`id_comment`);
+
+--
 -- Chỉ mục cho bảng `tbl_customer`
 --
 ALTER TABLE `tbl_customer`
@@ -330,6 +357,12 @@ ALTER TABLE `tbl_cart_deltails`
 --
 ALTER TABLE `tbl_category_product`
   MODIFY `id_category_product` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT cho bảng `tbl_comment`
+--
+ALTER TABLE `tbl_comment`
+  MODIFY `id_comment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_customer`
