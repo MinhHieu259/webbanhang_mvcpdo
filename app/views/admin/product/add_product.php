@@ -26,6 +26,10 @@
                                     <input type="file" name="image_product" class="form-control"  placeholder="Nhập số lượng sản phẩm">
                                 </div>
                                 <div class="form-group">
+                                    <label style="font-size: 15px;">Hình ảnh mô tả</label>
+                                    <input multiple="multiple" type="file" name="image_product_desc[]" class="form-control"  placeholder="Nhập số lượng sản phẩm">
+                                </div>
+                                <div class="form-group">
                                     <label style="font-size: 15px;">Giá sản phẩm</label>
                                     <input type="text" name="price_product" class="form-control"  placeholder="Nhập giá sản phẩm">
                                 </div>

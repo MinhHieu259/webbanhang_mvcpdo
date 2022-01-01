@@ -36,6 +36,7 @@
             $category = $_POST['category_product'];
 
             $table = "tbl_product";
+            $table_img = "tbl_image_desc";
             $data = array(
                 'title_product' => $title,
                 'price_product' => $price,
@@ -334,7 +335,22 @@
 
         public function timkiem()
         {
-            echo $_POST['txt_Search'];
+            Session::init();
+            $categorymodel = $this->load->model("categorymodel");
+            $productmodel = $this->load->model("productmodel");
+            $table_product = "tbl_product";
+            $table_category_product = "tbl_category_product";
+            $data['category'] = $categorymodel->category_home($table_category_product);
+
+            $txt_search = $_POST['txt_Search'];
+            $tukhoa[] = $_POST['txt_Search']
+            ;
+            $data['tukhoa'] = $tukhoa;
+            $cond = "title_product like '%$txt_search%' ORDER BY id_product DESC";
+            $data['timkiem'] = $productmodel->search_product($table_product, $cond);
+            $this->load->view("header",$data);
+            $this->load->view("timkiem", $data);
+            $this->load->view("footer");
         }
         
     }
