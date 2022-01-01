@@ -24,32 +24,24 @@ foreach ($data['detail_product'] as $item => $value) {
 					<div class="product-details"><!--product-details-->
 						<div class="col-sm-5">
 							<div class="view-product">
-								<img src="<?php echo BASE_URL;?>/public/uploads/product/<?php echo $detail['image_product'];?>" alt="" />
+								<img id="expandedImg" src="<?php echo BASE_URL;?>/public/uploads/product/<?php echo $detail['image_product'];?>" alt="" />
 								<h3>ZOOM</h3>
 							</div>
 							<div id="similar-product" class="carousel slide" data-ride="carousel">
 								
 								  <!-- Wrapper for slides -->
 								    <div class="carousel-inner">
-										<div class="item active">
-										  <a href=""><img width="80" src="<?php echo BASE_URL;?>/public/uploads/product/<?php echo $detail['image_product'];?>" alt=""></a>
-										  
-										</div>
-										
-										<div class="item">
-										  <a href=""><img width="60" src="<?php echo BASE_URL;?>/public/uploads/product/<?php echo $detail['image_product'];?>" alt=""></a>
-										 
-										</div>
-										
-									</div>
 
-								  <!-- Controls -->
-								  <a class="left item-control" href="#similar-product" data-slide="prev">
-									<i class="fa fa-angle-left"></i>
-								  </a>
-								  <a class="right item-control" href="#similar-product" data-slide="next">
-									<i class="fa fa-angle-right"></i>
-								  </a>
+										<div class="item active">
+										  <img onclick="changeImage(this);" width="80" src="<?php echo BASE_URL;?>/public/uploads/product/<?php echo $detail['image_product'];?>" alt="">
+										  <img onclick="changeImage(this);" width="80" src="<?php echo BASE_URL;?>/public/uploads/product/<?php echo $detail['image_product'];?>" alt="">
+										  <img onclick="changeImage(this);" width="80" src="<?php echo BASE_URL;?>/public/uploads/product/<?php echo $detail['image_product'];?>" alt="">
+										  <img onclick="changeImage(this);" width="80" src="<?php echo BASE_URL;?>/public/uploads/product/<?php echo $detail['image_product'];?>" alt="">
+										  <img onclick="changeImage(this);" width="80" src="<?php echo BASE_URL;?>/public/uploads/product/<?php echo $detail['image_product'];?>" alt="">
+										  <img onclick="changeImage(this);" width="80" src="<?php echo BASE_URL;?>/public/uploads/product/<?php echo $detail['image_product'];?>" alt="">
+		
+										</div>
+									</div>
 							</div>
 
 						</div>
@@ -57,13 +49,12 @@ foreach ($data['detail_product'] as $item => $value) {
 							<div class="product-information"><!--/product-information-->
 								<img src="images/product-details/new.jpg" class="newarrival" alt="" />
 								<h2><?php echo $detail['title_product'];?></h2>
-								<p>Web ID: 1089772</p>
 								<img src="images/product-details/rating.png" alt="" />
 								<span>
 									<span><?php echo number_format($detail['price_product'],0,',','.').' VNĐ';?></span>
 									<label>Số lượng:</label>
 									<input type="hidden" name="product_id" value="<?php echo $detail['id_product'];?>">
-									<input type="hidden" name="product_quantity" value="1">
+									<input type="number" name="product_quantity" value="1" >
 									<button type="submit" class="btn btn-fefault cart">
 										<i class="fa fa-shopping-cart"></i>
 										Thêm giỏ hàng

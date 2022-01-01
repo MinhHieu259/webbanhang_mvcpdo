@@ -90,5 +90,11 @@ class productmodel extends DModel{
     $sql = "SELECT * FROM $table_customer, $table_comment WHERE $cond";
     return $this->db->select($sql);
  }
+
+ public function search_product($table, $cond)
+ {
+    $sql = "SELECT * FROM $table WHERE $cond";
+    return $this->db->select($sql);
+ }
 }
 ?>

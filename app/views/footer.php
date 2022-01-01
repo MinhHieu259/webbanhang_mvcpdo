@@ -125,6 +125,41 @@
 				<script>swal("Thất bại!", "<?php echo $value;?>", "warning");</script>
 			
 				<?php }}}?>	
+
+			<script>
+				function changeImage(imgs) {
+							var expandImg = document.getElementById("expandedImg");
+							
+							expandImg.src = imgs.src;
+							
+							expandImg.parentElement.style.display = "block";
+						}
+			</script>
+
+<script type="text/javascript">
+				$(document).ready(function(){
+					var action = "search";
+					$('#txt_Search').keyup(function(){
+						var search_name = $("#txt_Search").val();
+						if($("#txt_Search").val() != ''){
+							$.ajax({
+							url: "<?php echo BASE_URL;?>/product/search_product",
+							method:"POST",
+							data:{action:action,search_name:search_name},
+							success:function(data){
+								$('#output_search').html(data);
+							}
+						});
+						}else{
+							$('#output_search').html("");
+						}
+						
+						console.log(action);
+					});
+
+					
+				});
+			</script>
 	
 </body>
 </html>

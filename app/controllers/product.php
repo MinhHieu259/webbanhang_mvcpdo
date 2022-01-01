@@ -313,6 +313,29 @@
 
         }
 
+        public function search_product()
+        {
+            $productmodel = $this->load->model("productmodel");
+            $table_product = "tbl_product";
+            if(isset($_POST['action'])){
+                $search_name = $_POST['search_name'];
+                $cond = "title_product LIKE '%$search_name%'";
+                $result = $productmodel->search_product($table_product, $cond );
+                $output ="";
+                $url = BASE_URL;
+                foreach ($result as $rows) {
+                    $output .= '
+                   <a href="'.$url.'/product/chitietsanpham/'.$rows['id_product'].'"> <li  class="list-group-item"><img width="20" src="'.$url.'/public/uploads/product/'.$rows['image_product'].'" alt="anh"> '.$rows['title_product'].'</li></a>
+                    '; 
+                }
+                echo $output;
+            }
+        }
+
+        public function timkiem()
+        {
+            echo $_POST['txt_Search'];
+        }
         
     }
     

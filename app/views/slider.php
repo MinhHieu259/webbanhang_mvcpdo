@@ -1,4 +1,4 @@
-<section id="slider"><!--slider-->
+<section id="slider" style="z-index: 0 !important;"><!--slider-->
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12">

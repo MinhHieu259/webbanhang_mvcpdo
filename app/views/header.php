@@ -107,11 +107,22 @@
 					</div>
 					<div class="col-sm-3">
 						<div class="search_box pull-right">
-							<form action="" method="post">
-							<input type="text" placeholder="Tìm kiếm"/>
-							</form>
+						<form action="<?php echo BASE_URL;?>/product/timkiem" method="POST">
+							
+							<input type="text" id="txt_Search" name="txt_Search" placeholder="Tìm kiếm"/>
+							
+						</form>
+							<br>
+							<ul class="list-group" id="output_search">
+								
+								
+							</ul>
 						</div>
+						
+						
 					</div>
+
+					
 				</div>
 			</div>
 		</div><!--/header-bottom-->
