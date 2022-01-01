@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Shop Minh Hiếu</title>
+    <title>Website bán hàng</title>
     <link href="<?php echo BASE_URL;?>/public/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo BASE_URL;?>/public/css/font-awesome.min.css" rel="stylesheet">
     <link href="<?php echo BASE_URL;?>/public/css/prettyPhoto.css" rel="stylesheet">

@@ -130,6 +130,7 @@
 
        public function chitietorder($order_id)
        {
+           Session::init();
         $ordermodel = $this->load->model('ordermodel');
         $categorymodel = $this->load->model("categorymodel");
         $table_category_product = "tbl_category_product";
