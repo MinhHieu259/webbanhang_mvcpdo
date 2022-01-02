@@ -47,6 +47,29 @@
             );
             $productmodel = $this->load->model('productmodel');
             $result = $productmodel->insertproduct($table, $data);
+            $result_all_product = $productmodel->getAllProduct($table);
+            $product_id = $result_all_product[0]['id_product'];
+
+            for($i = 0 ; $i<count($_FILES['image_product_desc']) ; $i++){
+
+            
+
+            $image_desc = $_FILES['image_product_desc']['name'][$i];
+            $tmp_image_desc = $_FILES['image_product_desc']['tmp_name'][$i];
+            $div_desc = explode('.', $image_desc);
+            $file_ext_desc = strtolower(end($div_desc));
+            $unique_image_desc = $div_desc[0].time().'.'.$file_ext_desc;
+            $path_upload_desc = "public/uploads/product/".$unique_image_desc;
+            
+            $data_image = array(
+                'id_sanpham' => $product_id,
+                'image' => $unique_image_desc
+            );
+            $result_insert_image = $productmodel->insert_image_desc($table_img, $data_image);
+            if($result_insert_image == 1 ){
+                move_uploaded_file($tmp_image_desc, $path_upload_desc);
+            
+        }
             if($result == 1 ){
                 move_uploaded_file($tmp_image, $path_upload);
                 $message['msg'] = "Thêm sản phẩm thành công";
@@ -56,6 +79,7 @@
                 header("Location:".BASE_URL."/product/list_product?error=".urlencode(serialize($message)));
             }
         }
+    }
       
         public function list_product()
         {
@@ -191,7 +215,8 @@
             $table_product = "tbl_product";
             $table_comment = "tbl_comment";
             $table_customer = "tbl_customer";
-            $cond = "$table_product.id_category_product = $table_category_product.id_category_product AND $table_product.id_product = '$id'";
+            $table_image = "tbl_image_desc";
+            $cond = "$table_product.id_category_product = $table_category_product.id_category_product  AND $table_product.id_product = '$id'";
         
             $data['category'] = $categorymodel->category_home($table_category_product);
             $data['detail_product'] = $productmodel->detail_product_home($table_product,$table_category_product, $cond);
@@ -204,7 +229,9 @@
             $customer_id = Session::get("customer_id");
             $cond_comment = "$table_comment.id_customer = $table_customer.customer_id AND $table_comment.id_product = $id";
             $data['comment'] = $productmodel->show_comment($table_customer, $table_comment, $cond_comment );
-           
+            
+            $cond_image = "$table_image.id_sanpham = $table_product.id_product AND $table_image.id_sanpham = $id";
+            $data['image_desc'] = $productmodel->get_desc_image($table_product, $table_image, $cond_image);
             $this->load->view("header",$data);
             $this->load->view("detailproduct", $data);
             $this->load->view("footer");

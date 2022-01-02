@@ -33,12 +33,9 @@ foreach ($data['detail_product'] as $item => $value) {
 								    <div class="carousel-inner">
 
 										<div class="item active">
-										  <img onclick="changeImage(this);" width="80" src="<?php echo BASE_URL;?>/public/uploads/product/<?php echo $detail['image_product'];?>" alt="">
-										  <img onclick="changeImage(this);" width="80" src="<?php echo BASE_URL;?>/public/uploads/product/<?php echo $detail['image_product'];?>" alt="">
-										  <img onclick="changeImage(this);" width="80" src="<?php echo BASE_URL;?>/public/uploads/product/<?php echo $detail['image_product'];?>" alt="">
-										  <img onclick="changeImage(this);" width="80" src="<?php echo BASE_URL;?>/public/uploads/product/<?php echo $detail['image_product'];?>" alt="">
-										  <img onclick="changeImage(this);" width="80" src="<?php echo BASE_URL;?>/public/uploads/product/<?php echo $detail['image_product'];?>" alt="">
-										  <img onclick="changeImage(this);" width="80" src="<?php echo BASE_URL;?>/public/uploads/product/<?php echo $detail['image_product'];?>" alt="">
+											<?php foreach ($data['image_desc'] as $item => $image_desc) {?>
+										  <img onclick="changeImage(this);" width="80" src="<?php echo BASE_URL;?>/public/uploads/product/<?php echo $image_desc['image'];?>" alt="">
+										  <?php }?>
 		
 										</div>
 									</div>

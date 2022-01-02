@@ -96,5 +96,21 @@ class productmodel extends DModel{
     $sql = "SELECT * FROM $table WHERE $cond";
     return $this->db->select($sql);
  }
+
+ public function getAllProduct($table)
+ {
+    $sql = "SELECT * FROM $table ORDER BY id_product DESC";
+    return $this->db->select($sql);
+ }
+ public function insert_image_desc($table, $data)
+ {
+    return $this->db->insert($table, $data);
+ }
+
+ public function get_desc_image($table_product,$table_image, $cond)
+ {
+     $sql = "SELECT * FROM $table_product, $table_image WHERE $cond";
+     return $this->db->select($sql);
+ }
 }
 ?>
