@@ -4,5 +4,5 @@
                 });
                 include_once 'app/config/config.php';
                 $main = new Main();
-            ?>
+            ?>d
        
