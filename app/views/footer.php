@@ -89,6 +89,7 @@
 	<script src="<?php echo BASE_URL;?>/public/js/price-range.js"></script>
     <script src="<?php echo BASE_URL;?>/public/js/jquery.prettyPhoto.js"></script>
     <script src="<?php echo BASE_URL;?>/public/js/main.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<?php 
          if(!empty($_GET['msg'])){
@@ -163,3 +164,179 @@
 	
 </body>
 </html>
+<div class="modal fade" id="review_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Viết đánh giá</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h4 class="text-center mt-2 mb-4">
+				<i class="fas fa-star star-light submit_star mr-1" 
+				id="submit_star_1" data-rating="1"></i>
+				<i class="fas fa-star star-light submit_star mr-1" 
+				id="submit_star_2" data-rating="2"></i>
+				<i class="fas fa-star star-light submit_star mr-1" 
+				id="submit_star_3" data-rating="3"></i>
+				<i class="fas fa-star star-light submit_star mr-1" 
+				id="submit_star_4" data-rating="4"></i>
+				<i class="fas fa-star star-light submit_star mr-1" 
+				id="submit_star_5" data-rating="5"></i>
+		</h4>
+		<div class="form-group">
+			<textarea placeholder="Viết đánh giá" class="form-control" name="text_comment" id="user_review"></textarea>
+		</div>
+		<div class="form-group text-center mt-4">
+				<button type="button" class="btn btn-primary" id="save_review">Đánh giá</button>
+		</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+       
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+	$(document).ready(function(){
+		var rating_data = 0;
+		$('#add_review').click(function(){
+			$('#review_modal').modal('show');
+		});
+
+		$(document).on('mouseenter', '.submit_star', function(){
+			var rating = $(this).data('rating');
+
+			 reset_background();
+			for(var count = 1; count <= rating; count++){
+				$('#submit_star_'+count).addClass('text-primary');
+			}
+		});
+		function reset_background() {
+			for (var count = 1; count <=5; count++) {
+				
+				$('#submit_star_'+count).addClass('star-light');
+
+				$('#submit_star_'+count).removeClass('text-primary');
+				
+			}
+		}
+
+		$(document).on('mouseleave', '.submit_star', function(){
+			reset_background();
+		});
+
+		$(document).on('click', '.submit_star', function(){
+			rating_data = $(this).data('rating');
+		});
+		<?php foreach ($data['detail_product'] as $item => $detail_pro) {
+					$id_pro = $detail_pro['id_product'];
+				}?>
+		$('#save_review').click(function(){
+			var user_review = $('#user_review').val();
+			if (user_review == '') {
+				alert('Chưa nhập đánh giá');
+				return false;
+			}else{
+				
+				$.ajax({
+					url:"<?php echo BASE_URL;?>/product/binhluan/<?php echo $id_pro;?>",
+					method:"POST",
+					data:{rating_data:rating_data, user_review:user_review},
+					success:function(data){
+						$('#review_modal').modal('hide');
+						load_rating_data();
+						alert(data);
+					}
+				});
+			}
+		});
+		load_rating_data();
+		function load_rating_data()
+		{
+			$.ajax({
+				url:"<?php echo BASE_URL;?>/product/loadSoSao/<?php echo $id_pro;?>",
+				method:"POST",
+				data:{action:'load_data'},
+				dataType:"JSON",
+				success:function(data){
+					$('#average_rating').text(data.average_rating);
+					$('#total_review').text(data.total_review);
+
+					var count_star =0;
+					$('.main_star').each(function(){
+						count_star++;
+						if(Math.ceil(data.average_rating) >= count_star){
+							$(this).addClass('text-primary');
+							$(this).addClass('star-light');
+						}
+					});
+					$('#total_file_star_review').text(data.five_star_review);
+					$('#total_four_star_review').text(data.four_star_review);
+					$('#total_three_star_review').text(data.three_star_review);
+					$('#total_two_star_review').text(data.two_star_review);
+					$('#total_one_star_review').text(data.one_star_review);
+
+					$('#five_star_progress').css('width', (data.five_star_review / data.total_review) * 100 +
+					'%');
+					$('#four_star_progress').css('width', (data.four_star_review / data.total_review) * 100 +
+					'%');
+					$('#three_star_progress').css('width', (data.three_star_review / data.total_review) * 100 +
+					'%');
+					$('#two_star_progress').css('width', (data.two_star_review / data.total_review) * 100 +
+					'%');
+					$('#one_star_progress').css('width', (data.one_star_review / data.total_review) * 100 +
+					'%');
+
+					if(data.review_data.length > 0){
+						var html = '';
+						for(var count = 0 ; count < data.review_data.length; count++){
+							html+= '<div class="row mb-3">';
+
+							html+= '<div class="col-sm-1"><div class="rounded-circle bg-danger text-white pt-2 pb-2"><h3 class="text-center">'+data.review_data[count].name_customer.charAt(0)+'</h3></div></div>';
+
+							html+= '<div class="col-sm-11">';
+
+							html+= '<div class="card">';
+
+							html+= '<div class="card-header"><b>'+data.review_data[count].name_customer+'</b></div>'
+
+							html += '<div class="card-body">';
+								for(var star =1; star<=5; star++){
+									var class_name = '';
+									if(data.review_data[count].rating >= star){
+										class_name= 'text-primary';
+
+									}else{
+										class_name = 'star-light';
+									}
+									html+= '<i class="fas fa-star '+class_name+' mr-1"></i>';
+								}
+
+							html+= '<br>';
+							
+							html+= data.review_data[count].content;
+
+							html+= '</div>';
+
+							
+
+							html+= '</div>';
+
+							html+= '</div>';
+
+							html+= '</div>';
+							html+= '<br>';
+						}
+
+						$('#review_content').html(html);
+					}
+				}
+			});
+		}
+	});
+</script>

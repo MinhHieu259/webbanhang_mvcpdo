@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 31, 2021 lúc 09:40 AM
+-- Thời gian đã tạo: Th1 02, 2022 lúc 07:07 PM
 -- Phiên bản máy phục vụ: 10.4.18-MariaDB
 -- Phiên bản PHP: 8.0.3
 
@@ -105,16 +105,21 @@ CREATE TABLE `tbl_comment` (
   `id_comment` int(11) NOT NULL,
   `id_customer` int(11) NOT NULL,
   `id_product` int(11) NOT NULL,
-  `content` varchar(255) NOT NULL
+  `content` varchar(255) NOT NULL,
+  `rating` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Đang đổ dữ liệu cho bảng `tbl_comment`
 --
 
-INSERT INTO `tbl_comment` (`id_comment`, `id_customer`, `id_product`, `content`) VALUES
-(2, 1, 5, 'Máy đẹp quá :D'),
-(3, 1, 4, 'Máy quá tệ ');
+INSERT INTO `tbl_comment` (`id_comment`, `id_customer`, `id_product`, `content`, `rating`) VALUES
+(2, 1, 5, 'Máy đẹp quá :D', 5),
+(3, 1, 4, 'Máy quá tệ ', 0),
+(5, 2, 5, 'đẹp', 5),
+(6, 2, 4, 'máy quá tốt', 5),
+(7, 2, 7, 'quá tệ :v', 2),
+(8, 2, 1, 'Máy tạm được', 4);
 
 -- --------------------------------------------------------
 
@@ -139,6 +144,18 @@ INSERT INTO `tbl_customer` (`customer_id`, `customer_name`, `customer_phone`, `c
 (1, 'Nguyễn Minh Hiếu', '0774452227', 'mhieu7252@gmail.com', '12345678', 'Phong Điền, Thừa thiên huế'),
 (2, 'Hieu Nguyen', '0329568259', 'mhieu@gmail.com', '12345678', 'Huế'),
 (3, 'Hiếu Nguyễn', '12444444', 'minhhieu.it.ute@gmail.com', '12345678', 'Huế');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `tbl_image_desc`
+--
+
+CREATE TABLE `tbl_image_desc` (
+  `id_image` int(11) NOT NULL,
+  `id_sanpham` int(11) NOT NULL,
+  `image` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -377,7 +394,7 @@ ALTER TABLE `tbl_category_product`
 -- AUTO_INCREMENT cho bảng `tbl_comment`
 --
 ALTER TABLE `tbl_comment`
-  MODIFY `id_comment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_comment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_customer`

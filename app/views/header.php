@@ -112,8 +112,8 @@
 							<input type="text" id="txt_Search" name="txt_Search" placeholder="Tìm kiếm"/>
 							
 						</form>
-							<br>
-							<ul class="list-group" id="output_search">
+							
+							<ul class="list-group" id="output_search" style="position: absolute; z-index: 2; width: 200px;">
 								
 								
 							</ul>

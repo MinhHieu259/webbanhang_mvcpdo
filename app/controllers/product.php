@@ -234,7 +234,7 @@
             $data['image_desc'] = $productmodel->get_desc_image($table_product, $table_image, $cond_image);
             $this->load->view("header",$data);
             $this->load->view("detailproduct", $data);
-            $this->load->view("footer");
+            $this->load->view("footer", $data);
         }
        
         public function add_yeuthich($id_sanpham)
@@ -318,24 +318,26 @@
              if($customer_id != null && $check_comment == 1){
                
                 
-                $message['error'] = "Bạn chỉ được bình luận 1 lần";
-                header("Location:".BASE_URL."/product/chitietsanpham/$id_product?error=".urlencode(serialize($message)));
-                
+                //$message['error'] = "Bạn chỉ được bình luận 1 lần";
+                //header("Location:".BASE_URL."/product/chitietsanpham/$id_product?error=".urlencode(serialize($message)));
+                echo "Bạn chỉ được bình luận 1 lần";
             } else{
             $data = array(
                 'id_customer' => $customer_id,
                 'id_product' => $id_product,
-                'content' => $_POST['text_comment']
+                'content' => $_POST['user_review'],
+                'rating' => $_POST['rating_data']
             );
             
             $result = $productmodel->add_comment($table_comment, $data);
             if($result == 1 ){
-                $message['msg'] = "Bình luận thành công";
-                header("Location:".BASE_URL."/product/chitietsanpham/$id_product?msg=".urlencode(serialize($message)));
-                
+                //$message['msg'] = "Bình luận thành công";
+                //header("Location:".BASE_URL."/product/chitietsanpham/$id_product?msg=".urlencode(serialize($message)));
+                echo "Đánh giá thành công";
             }else {
-                $message['error'] = "Bình luận thất bại";
-                header("Location:".BASE_URL."/product/chitietsanpham/$id_product?error=".urlencode(serialize($message)));
+                //$message['error'] = "Bình luận thất bại";
+                //header("Location:".BASE_URL."/product/chitietsanpham/$id_product?error=".urlencode(serialize($message)));
+                echo "Bình luận thất bại";
             }
             }
 
@@ -380,6 +382,62 @@
             $this->load->view("footer");
         }
         
+        public function loadSoSao($id)
+        {
+            $table_comment = "tbl_comment";
+            $table_customer = "tbl_customer";
+            $productmodel = $this->load->model("productmodel");
+            if(isset($_POST['action'])){
+                $average_rating = 0;
+                $total_review = 0;
+                $five_star_review = 0;
+                $four_star_review = 0;
+                $three_star_review = 0;
+                $two_star_review = 0;
+                $one_star_review = 0;
+                $total_user_rating = 0;
+                $review_content = array();
+                $cond = "$table_comment.id_customer = $table_customer.customer_id AND $table_comment.id_product = $id";
+                $result = $productmodel->show_comment($table_customer, $table_comment, $cond );
+                foreach ($result as $row) {
+                    $review_content[] = array(
+                        'name_customer' => $row['customer_name'],
+                        'id_product' => $row['id_product'],
+                        'content' => $row['content'],
+                        'rating' => $row['rating']
+                    );
+                    if($row['rating'] == '5'){
+                        $five_star_review++;
+                    }
+                    if($row['rating'] == '4'){
+                        $four_star_review++;
+                    }
+                    if($row['rating'] == '3'){
+                        $three_star_review++;
+                    }
+                    if($row['rating'] == '2'){
+                        $two_star_review++;
+                    }
+                    if($row['rating'] == '1'){
+                        $one_star_review++;
+                    }
+                    $total_review++;
+                    $total_user_rating = $total_user_rating + $row['rating'];
+                }
+                $average_rating = $total_user_rating / $total_review;
+                $output = array(
+                    'average_rating' => number_format($average_rating, 1),
+                    'total_review' => $total_review,
+                    'five_star_review' => $five_star_review,
+                    'four_star_review' => $four_star_review,
+                    'three_star_review' => $three_star_review,
+                    'two_star_review' => $two_star_review,
+                    'one_star_review' => $one_star_review,
+                    'review_data' => $review_content
+                );
+                echo json_encode($output);
+            }
+        }
     }
     
 ?>

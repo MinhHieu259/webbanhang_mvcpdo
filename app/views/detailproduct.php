@@ -15,8 +15,8 @@ foreach ($data['detail_product'] as $item => $value) {
 				</ol>
 			</div>
 			<div class="row">
-					<?php include_once("sidebar.php");?>
-				<div class="col-sm-9 padding-right">
+					
+				<div class="col-sm-12 padding-right">
 					<form action="<?php echo BASE_URL;?>/cart/addCart" method="post">
 					<?php foreach ($data['detail_product'] as $item => $detail) {
 						
@@ -61,7 +61,7 @@ foreach ($data['detail_product'] as $item => $value) {
 									echo "Còn hàng";
 								}else{echo "hết hàng";}?></p>
 								<p><b>Hàng:</b> Mới</p>
-								<p><b>Thương hiệu:</b> E-SHOPPER</p>
+								
 								<a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a>
 							</div><!--/product-information-->
 						</div>
@@ -86,63 +86,109 @@ foreach ($data['detail_product'] as $item => $value) {
 							</div>
 							
 							<div class="tab-pane fade active in" id="reviews" >
-							<div class="row">
-								<div class="col-sm-12">
-									
-									<?php if(Session::get("customer_id")!= null){?>
-									<p><b>Viết đánh giá</b></p>
-									
-									<form method="POST" action="<?php echo BASE_URL;?>/product/binhluan/<?php echo $detail['id_product'];?>">
-										
-										<textarea name="text_comment" ></textarea>
-	
-										<button type="submit" class="btn btn-default pull-right">
-											Đánh giá
-										</button>
-									</form>
-										<?php }?>
-										
-										
+							<div class="container">
+								<div class="card">
+									<div class="card-header">Đánh giá sản phẩm</div>
+									<div class="card-body">
+										<div class="row">
+											<div class="col-sm-4 text-center">
+												<h1 class="text-primary mt-4 mb-4">
+													<b><span id="average_rating">0.0</span> / 5</b>
+												</h1>
+												<div class="mb-3">
+													<i class="fas fa-star star-light mr-1 main_star"></i>
+													<i class="fas fa-star star-light mr-1 main_star"></i>
+													<i class="fas fa-star star-light mr-1 main_star"></i>
+													<i class="fas fa-star star-light mr-1 main_star"></i>
+													<i class="fas fa-star star-light mr-1 main_star"></i>
+												</div>
+												<h3><span id="total_review">0</span> Đánh giá</h3>
+											</div>
+											<div class="col-sm-4">
+												<p>
+													<div class="progress-label-left">
+														<b>5</b>
+														<i class="fas fa-star text-primary"></i>
+													</div>
+
+													<div class="progress-label-right">( <span id="total_file_star_review">0</span> )</div>
+													<div class="progress">
+														<div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" 
+														aria-valuemin="0" aria-valuemax="100" id="five_star_progress" >
+
+														</div> 
+													</div>
+												</p>
+												<p>
+												<div class="progress-label-left">
+														<b>4</b>
+														<i class="fas fa-star text-primary"></i>
+													</div>
+
+													<div class="progress-label-right">( <span id="total_four_star_review">0</span> )</div>
+													<div class="progress">
+														<div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" 
+														aria-valuemin="0" aria-valuemax="100" id="four_star_progress" >
+
+														</div> 
+													</div>
+				
+												</p>
+												<p>
+												<div class="progress-label-left">
+														<b>3</b>
+														<i class="fas fa-star text-primary"></i>
+													</div>
+
+													<div class="progress-label-right">( <span id="total_three_star_review">0</span> )</div>
+													<div class="progress">
+														<div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" 
+														aria-valuemin="0" aria-valuemax="100" id="three_star_progress" >
+
+														</div> 
+													</div>
+												</p>
+												<p>
+												<div class="progress-label-left">
+														<b>2</b>
+														<i class="fas fa-star text-primary"></i>
+													</div>
+
+													<div class="progress-label-right">( <span id="total_two_star_review">0</span> )</div>
+													<div class="progress">
+														<div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" 
+														aria-valuemin="0" aria-valuemax="100" id="two_star_progress" >
+
+														</div> 
+													</div>
+												</p>
+												<p>
+												<div class="progress-label-left">
+														<b>1</b>
+														<i class="fas fa-star text-primary"></i>
+													</div>
+
+													<div class="progress-label-right">( <span id="total_one_star_review">0</span> )</div>
+													<div class="progress">
+														<div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" 
+														aria-valuemin="0" aria-valuemax="100" id="one_star_progress" >
+
+														</div> 
+														
+													</div>
+													
+												</p>
+											</div>
+											<div class="col-sm-4 text-center">
+												<h3 class="mt-4 mb-3">Viết đánh giá</h3>
+												<button type="button" name="add_review" id="add_review" class="btn btn-primary">Đánh giá</button>
+											</div>
+										</div>
+									</div>
 								</div>
+								<div class="mt-5" id="review_content"></div>
 							</div>
-							<div class="row">
-							<div class="panel panel-default widget">
-            <div class="panel-heading">
-                <span class="glyphicon glyphicon-comment"></span>
-                <h3 class="panel-title">
-                    Danh sách bình luận</h3>
-                <span class="label label-info">
-                    78</span>
-            </div>
-            <div class="panel-body">
-                <ul class="list-group">
-					<?php if($data['comment'] != null){?>
-				<?php foreach ($data['comment'] as $item => $comment) {?>
-                    <li class="list-group-item">
-                        <div class="row">
-                            <div class="col-xs-2 col-md-1">
-                                <img src="http://placehold.it/80" class="img-circle img-responsive" alt="" /></div>
-                            <div class="col-xs-10 col-md-11">
-                                <div>
-                                    
-                                    <div class="mic-info">
-                                        By: <a href="#"><?php echo $comment['customer_name']?></a> 
-                                    </div>
-                                </div>
-                                <div class="comment-text">
-								<?php echo $comment['content']?>
-                                </div>
-                               
-                            </div>
-                        </div>
-                    </li>
-					<?php }?>
-					<?php }else{ echo '<center><span style="color:blue;">Chưa có bình luận nào</span></center>';}?>
-                </ul>
-                <a href="#" class="btn btn-primary btn-sm btn-block" role="button"><span class="glyphicon glyphicon-refresh"></span> Xem thêm</a>
-            </div>
-        </div>
-							</div>
+						
 								
 							</div>
 							
