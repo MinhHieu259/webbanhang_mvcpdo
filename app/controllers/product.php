@@ -50,7 +50,7 @@
             $result_all_product = $productmodel->getAllProduct($table);
             $product_id = $result_all_product[0]['id_product'];
 
-            for($i = 0 ; $i<count($_FILES['image_product_desc']) ; $i++){
+            for($i = 0 ; $i<count($_FILES['image_product_desc'])+1 ; $i++){
 
             
 

@@ -239,7 +239,8 @@
 		$('#save_review').click(function(){
 			var user_review = $('#user_review').val();
 			if (user_review == '') {
-				alert('Chưa nhập đánh giá');
+				
+				swal("Lỗi!", "Chưa nhập đánh giá!", "warning");
 				return false;
 			}else{
 				
@@ -250,7 +251,7 @@
 					success:function(data){
 						$('#review_modal').modal('hide');
 						load_rating_data();
-						alert(data);
+						swal(data);
 					}
 				});
 			}

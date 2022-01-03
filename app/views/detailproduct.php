@@ -181,7 +181,11 @@ foreach ($data['detail_product'] as $item => $value) {
 											</div>
 											<div class="col-sm-4 text-center">
 												<h3 class="mt-4 mb-3">Viết đánh giá</h3>
+												<?php if(Session::get("customer_id") != ""){?>
 												<button type="button" name="add_review" id="add_review" class="btn btn-primary">Đánh giá</button>
+												<?php }else{?>
+													<a href="<?php echo BASE_URL;?>/customer/dangnhap_dangky" style="color: red;">Đăng nhập để đánh giá</a>
+													<?php }?>
 											</div>
 										</div>
 									</div>
