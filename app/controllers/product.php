@@ -52,8 +52,6 @@
 
             for($i = 0 ; $i<count($_FILES['image_product_desc'])+1 ; $i++){
 
-            
-
             $image_desc = $_FILES['image_product_desc']['name'][$i];
             $tmp_image_desc = $_FILES['image_product_desc']['tmp_name'][$i];
             $div_desc = explode('.', $image_desc);
